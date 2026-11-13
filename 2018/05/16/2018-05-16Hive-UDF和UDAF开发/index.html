@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dingguotao.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":300},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Hive UDF、UDAF、UDTF开发[TOC] 概述Hive自带了很多聚合，分析函数，见上篇。 Hive的自定义函数，分为三种：UDF、UDAF、UDTF  UDF：User Defined Functions，自定义函数，用来处理，输入一行，输出一行的操作，类似MapReduce中Map操作 UDAF：User Defined Aggregation Functions，自定义聚合函数，用来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive UDF和UDAF开发">
+<meta property="og:url" content="https://dingguotao.github.io/2018/05/16/2018-05-16Hive-UDF%E5%92%8CUDAF%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="大数据部落">
+<meta property="og:description" content="Hive UDF、UDAF、UDTF开发[TOC] 概述Hive自带了很多聚合，分析函数，见上篇。 Hive的自定义函数，分为三种：UDF、UDAF、UDTF  UDF：User Defined Functions，自定义函数，用来处理，输入一行，输出一行的操作，类似MapReduce中Map操作 UDAF：User Defined Aggregation Functions，自定义聚合函数，用来">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-05-16T01:36:21.000Z">
+<meta property="article:modified_time" content="2018-05-20T16:05:31.014Z">
+<meta property="article:author" content="iclouding">
+<meta property="article:tag" content="Hive">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dingguotao.github.io/2018/05/16/2018-05-16Hive-UDF%E5%92%8CUDAF%E5%BC%80%E5%8F%91/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dingguotao.github.io/2018/05/16/2018-05-16Hive-UDF%E5%92%8CUDAF%E5%BC%80%E5%8F%91/","path":"2018/05/16/2018-05-16Hive-UDF和UDAF开发/","title":"Hive UDF和UDAF开发"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hive UDF和UDAF开发 | 大数据部落</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大数据部落</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hadoop, Spark, OpenStack，Docker</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hive-UDF%E3%80%81UDAF%E3%80%81UDTF%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">Hive UDF、UDAF、UDTF开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pom%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">pom文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDF%E5%BC%80%E5%8F%91"><span class="nav-number">1.2.</span> <span class="nav-text">UDF开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80UDF%E5%BC%80%E5%8F%91"><span class="nav-number">1.2.1.</span> <span class="nav-text">基础UDF开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDAF%E5%BC%80%E5%8F%91"><span class="nav-number">1.3.</span> <span class="nav-text">UDAF开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDAF%E7%9A%84%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">UDAF的运行流程简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99resolver%E7%B1%BB"><span class="nav-number">1.3.2.</span> <span class="nav-text">编写resolver类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99evaluator%E7%B1%BB"><span class="nav-number">1.3.3.</span> <span class="nav-text">编写evaluator类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDTF%E5%BC%80%E5%8F%91"><span class="nav-number">1.4.</span> <span class="nav-text">UDTF开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0hive%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">部署到hive与使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.1.</span> <span class="nav-text">临时创建函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%B0%B8%E4%B9%85%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.2.</span> <span class="nav-text">创建永久函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="iclouding"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">iclouding</p>
+  <div class="site-description" itemprop="description">Hadoop, Spark, OpenStack，Docker</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dingguotao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;dingguotao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2018/05/16/2018-05-16Hive-UDF%E5%92%8CUDAF%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hive UDF和UDAF开发 | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hive UDF和UDAF开发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-05-16 09:36:21" itemprop="dateCreated datePublished" datetime="2018-05-16T09:36:21+08:00">2018-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2018-05-21 00:05:31" itemprop="dateModified" datetime="2018-05-21T00:05:31+08:00">2018-05-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Hive-UDF、UDAF、UDTF开发"><a href="#Hive-UDF、UDAF、UDTF开发" class="headerlink" title="Hive UDF、UDAF、UDTF开发"></a>Hive UDF、UDAF、UDTF开发</h1><p>[TOC]</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Hive自带了很多聚合，分析函数，见上篇。</p>
+<p>Hive的自定义函数，分为三种：UDF、UDAF、UDTF</p>
+<ul>
+<li>UDF：User Defined Functions，自定义函数，用来处理，输入一行，输出一行的操作，类似MapReduce中Map操作</li>
+<li>UDAF：User Defined Aggregation Functions，自定义聚合函数，用来处理输入多行，输出一行的操作，类似MapReduce中Reduce操作</li>
+<li>UDTF：User Defined Table Generating Functions，自定义表产生函数，用来处理输入一行，输出多行的操作</li>
+</ul>
+<h3 id="pom文件"><a href="#pom文件" class="headerlink" title="pom文件"></a>pom文件</h3><p>pom里增加以下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hive-exec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="UDF开发"><a href="#UDF开发" class="headerlink" title="UDF开发"></a>UDF开发</h2><p>UDF开发相对比较简单，但是实现起来，通常有两种方式：</p>
+<ul>
+<li>继承基础的UDF接口：函数读取和返回基本类型，即Hadoop和Hive的基本类型。如，Text、IntWritable、LongWritable、DoubleWritable等。</li>
+<li>继承复杂的GenericUDF接口，除了上述的，还可以处理Map、List、Set类型。 </li>
+</ul>
+<blockquote>
+<p>@Describtion注解是可选的，用于对函数进行说明，其中的<em>FUNC</em>字符串表示函数名，当使用DESCRIBE FUNCTION命令时，替换成函数名。@Describtion包含三个属性：</p>
+<ul>
+<li>name：用于指定Hive中的函数名。</li>
+<li>value：用于描述函数的参数。</li>
+<li>extended：额外的说明，如，给出示例。当使用DESCRIBE FUNCTION EXTENDED name的时候打印。</li>
+</ul>
+</blockquote>
+<h3 id="基础UDF开发"><a href="#基础UDF开发" class="headerlink" title="基础UDF开发"></a>基础UDF开发</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLenUDF</span> <span class="keyword">extends</span> <span class="title">UDF</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 要手动去写evaluate这个函数，函数参数可以是多个，类型必须是Hadoop兼容的Writable类型</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> Text col)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> col.getLength();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###GenericUDF接口</p>
+<p>GenericUDF接口比较复杂，要实现以下三个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个方法只调用一次，并且在evaluate()方法之前调用。该方法接受的参数是一个ObjectInspectors数组。该方法检查接受正确的参数类型和参数个数。  </span></span><br><span class="line"><span class="function">ObjectInspector <span class="title">initialize</span><span class="params">(ObjectInspector[] arguments)</span></span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//这个方法类似UDF的evaluate()方法。它处理真实的参数，并返回最终结果。  </span></span><br><span class="line"><span class="function">Object <span class="title">evaluate</span><span class="params">(GenericUDF.DeferredObject[] arguments)</span></span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//这个方法用于当实现的GenericUDF出错的时候，打印出提示信息。而提示信息就是你实现该方法最后返回的字符串。  </span></span><br><span class="line"><span class="function">String <span class="title">getDisplayString</span><span class="params">(String[] children)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>下面的hive自带的array_contains一个例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Description</span>(name = <span class="string">"array_contains"</span>, value=<span class="string">"_FUNC_(array, value) - Returns TRUE if the array contains value."</span>,</span><br><span class="line">    extended=<span class="string">"Example:\n &gt; SELECT _FUNC_(array(1, 2, 3), 2) FROM src LIMIT 1;\n true"</span>)</span><br><span class="line"><span class="meta">@NDV</span>(maxNdv = <span class="number">2</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericUDFArrayContains</span> <span class="keyword">extends</span> <span class="title">GenericUDF</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组索引</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ARRAY_IDX = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 值索引</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VALUE_IDX = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 个数</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ARG_COUNT = <span class="number">2</span>; <span class="comment">// Number of arguments to this UDF</span></span><br><span class="line">    <span class="comment">// 函数名字</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String FUNC_NAME = <span class="string">"ARRAY_CONTAINS"</span>; <span class="comment">// External Name</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// transient 是不需要序列化的</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> ObjectInspector valueOI;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> ListObjectInspector arrayOI;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> ObjectInspector arrayElementOI;</span><br><span class="line">    <span class="comment">// 结果</span></span><br><span class="line">  <span class="keyword">private</span> BooleanWritable result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这个进行参数类型检查</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> ObjectInspector <span class="title">initialize</span><span class="params">(ObjectInspector[] arguments)</span></span></span><br><span class="line"><span class="function">      <span class="keyword">throws</span> UDFArgumentException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if two arguments were passed</span></span><br><span class="line">    <span class="keyword">if</span> (arguments.length != ARG_COUNT) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentException(</span><br><span class="line">          <span class="string">"The function "</span> + FUNC_NAME + <span class="string">" accepts "</span></span><br><span class="line">              + ARG_COUNT + <span class="string">" arguments."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if ARRAY_IDX argument is of category LIST</span></span><br><span class="line">    <span class="keyword">if</span> (!arguments[ARRAY_IDX].getCategory().equals(Category.LIST)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(ARRAY_IDX,</span><br><span class="line">          <span class="string">"\""</span> + org.apache.hadoop.hive.serde.serdeConstants.LIST_TYPE_NAME + <span class="string">"\" "</span></span><br><span class="line">          + <span class="string">"expected at function ARRAY_CONTAINS, but "</span></span><br><span class="line">          + <span class="string">"\""</span> + arguments[ARRAY_IDX].getTypeName() + <span class="string">"\" "</span></span><br><span class="line">          + <span class="string">"is found"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    arrayOI = (ListObjectInspector) arguments[ARRAY_IDX];</span><br><span class="line">    arrayElementOI = arrayOI.getListElementObjectInspector();</span><br><span class="line"></span><br><span class="line">    valueOI = arguments[VALUE_IDX];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if list element and value are of same type</span></span><br><span class="line">    <span class="keyword">if</span> (!ObjectInspectorUtils.compareTypes(arrayElementOI, valueOI)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(VALUE_IDX,</span><br><span class="line">          <span class="string">"\""</span> + arrayElementOI.getTypeName() + <span class="string">"\""</span></span><br><span class="line">          + <span class="string">" expected at function ARRAY_CONTAINS, but "</span></span><br><span class="line">          + <span class="string">"\""</span> + valueOI.getTypeName() + <span class="string">"\""</span></span><br><span class="line">          + <span class="string">" is found"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是否是可比较类型</span></span><br><span class="line">    <span class="keyword">if</span> (!ObjectInspectorUtils.compareSupported(valueOI)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentException(<span class="string">"The function "</span> + FUNC_NAME</span><br><span class="line">          + <span class="string">" does not support comparison for "</span></span><br><span class="line">          + <span class="string">"\""</span> + valueOI.getTypeName() + <span class="string">"\""</span></span><br><span class="line">          + <span class="string">" types"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    result = <span class="keyword">new</span> BooleanWritable(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回Boolean类型返回值</span></span><br><span class="line">    <span class="keyword">return</span> PrimitiveObjectInspectorFactory.writableBooleanObjectInspector;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这个进行挨个比较，查找存在的元素</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">evaluate</span><span class="params">(DeferredObject[] arguments)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">    result.set(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    Object array = arguments[ARRAY_IDX].get();</span><br><span class="line">    Object value = arguments[VALUE_IDX].get();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> arrayLength = arrayOI.getListLength(array);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断数组是否为空</span></span><br><span class="line">    <span class="keyword">if</span> (value == <span class="keyword">null</span> || arrayLength &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 挨个比较</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arrayLength; ++i) &#123;</span><br><span class="line">      Object listElement = arrayOI.getListElement(array, i);</span><br><span class="line">      <span class="keyword">if</span> (listElement != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ObjectInspectorUtils.compare(value, valueOI, listElement, arrayElementOI) == <span class="number">0</span>) &#123;</span><br><span class="line">          result.set(<span class="keyword">true</span>);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 出错时返回值</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getDisplayString</span><span class="params">(String[] children)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">assert</span> (children.length == ARG_COUNT);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"array_contains("</span> + children[ARRAY_IDX] + <span class="string">", "</span></span><br><span class="line">              + children[VALUE_IDX] + <span class="string">")"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>以上两种实现不同之处是：GenericUDF 可以处理复杂类型参数，并且继承GenericUDF更加有效率，因为UDF class 需要HIve使用反射的方式去实现。 <strong>UDF是作用于一行的。</strong> </p>
+<h2 id="UDAF开发"><a href="#UDAF开发" class="headerlink" title="UDAF开发"></a>UDAF开发</h2><p>hive有两种UDAF：Simple和Generic。</p>
+<ul>
+<li>Simple。即继承<code>org.apache.hadoop.hive.ql.exec.UDAF</code>类，并在派生类中以静态内部类的方式实现<code>org.apache.hadoop.hive.ql.exec.UDAFEvaluator</code>接口。这种方式简单直接，但是在使用过程中需要依赖JAVA反射机制，因此性能相对较低。在Hive源码包<code>org.apache.hadoop.hive.contrib.udaf.example</code>中包含几个示例。。但是这些接口已经被注解为<strong>Deprecated</strong>，建议不要使用这种方式开发新的UDAF函数。</li>
+<li>Generic。这是Hive社区推荐的新的写法，以抽象类代替原有的接口。新的抽象类<code>org.apache.hadoop.hive.ql.udf.generic.AbstractGenericUDAFResolver</code>替代老的UDAF接口，新的抽象类<code>org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator</code>替代老的<code>UDAFEvaluator</code>接口。</li>
+</ul>
+<p><strong>UDAF是需要在hive的sql语句和group by联合使用，hive的group by对于每个分组，只能返回一条记录，这点和mysql不一样，切记。</strong></p>
+<p> Hive开发有两个步骤：</p>
+<ol>
+<li>编写<code>resolver</code>类，resolver负责类型检查，操作符重载。类继承<code>org.apache.hadoop.hive.ql.udf.generic.AbstractGenericUDAFResolver</code>，<code>AbstractGenericUDAFResolver</code>实现了<code>org.apache.hadoop.hive.ql.udf.generic.GenericUDAFResolver2</code>，方便统一接口。</li>
+<li>第二个是编写<code>evaluator</code>类。evaluator真正实现UDAF的逻辑。通常来说，实现<code>org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator</code> ，包括几个必须实现的抽象方法，这几个方法负责完成UDAF所需要处理的逻辑。 </li>
+</ol>
+<h3 id="UDAF的运行流程简介"><a href="#UDAF的运行流程简介" class="headerlink" title="UDAF的运行流程简介"></a>UDAF的运行流程简介</h3><p> 抽象类<code>GenericUDAFEvaluator</code>中，包含一个静态内部枚举类，和一系列抽象方法。这个枚举类的注释中，解释了各个枚举值的运行阶段和运行内容。按照时间先后顺序，分别有：</p>
+<ul>
+<li><p>PARTIAL1：原始数据到部分聚合，调用iterate和terminatePartial –&gt; map阶段</p>
+</li>
+<li><p>PARTIAL2: 部分聚合到部分聚合，调用merge和terminatePartial –&gt; combine阶段</p>
+</li>
+<li><p>FINAL: 部分聚合到完全聚合，调用merge和terminate –&gt; reduce阶段</p>
+</li>
+<li><p>COMPLETE: 从原始数据直接到完全聚合 –&gt; map阶段，并且没有reduce</p>
+<p>那么，这几个方法分别干了些啥呢？</p>
+</li>
+<li><p><code>init(Mode m, ObjectInspector[] parameters)</code>: 这个是非必须的，但是一般是需要的。实例化Evaluator类的时候调用的，在不同的阶段需要返回不同的OI。需要注意的是，在不同的模式下parameters的含义是不同的，比如m为 PARTIAL1 和 COMPLETE 时，parameters为原始数据；m为 PARTIAL2 和 FINAL 时，parameters仅为部分聚合数据（只有一个元素）。在 PARTIAL1 和 PARTIAL2 模式下，ObjectInspector  用于terminatePartial方法的返回值，在FINAL和COMPLETE模式下ObjectInspector 用于terminate方法的返回值。 其入参和返回值，以及Mode阶段的关系如下表：</p>
+<p>|          | 入参         | 返回值的使用者   |<br>| ——– | ———— | —————- |<br>| PARTIAL1 | 原始数据     | terminatePartial |<br>| PARTIAL2 | 部分聚合数据 | terminatePartial |<br>| FINAL    | 部分聚合数据 | terminate        |<br>| COMPLETE | 原始数据     | terminate        |</p>
+</li>
+<li><p><code>getNewAggregationBuffer()</code>: 返回存储临时聚合结果的AggregationBuffer对象</p>
+</li>
+<li><p><code>reset(AggregationBuffer agg)</code>: 重置聚合结果对象，以支持mapper和reducer的重用。</p>
+</li>
+<li><p><code>iterate(AggregationBuffer agg, Object[] parameters)</code>：迭代处理原始数据parameters并保存到agg中</p>
+</li>
+<li><p><code>terminatePartial(AggregationBuffer agg)</code>：返回部分聚合数据的持久化对象。因为调用这个方法时，说明已经是map或者combine的结束了，必须将数据持久化以后交给reduce进行处理。只支持JAVA原始数据类型及其封装类型、<strong>HADOOP Writable类型、List、Map</strong>，<strong>不能返回自定义的类，即使实现了Serializable也不行</strong>，否则会出现问题或者错误的结果。</p>
+</li>
+<li><p><code>merge(AggregationBuffer agg, Object partial)</code>：将<code>terminatePartial</code>返回的部分聚合数据进行合并，需要使用到对应的OI。</p>
+</li>
+<li><p><code>terminate(AggregationBuffer agg)</code>：返回最终结果。 </p>
+</li>
+</ul>
+<h3 id="编写resolver类"><a href="#编写resolver类" class="headerlink" title="编写resolver类"></a>编写<code>resolver</code>类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySumUDAF</span> <span class="keyword">extends</span> <span class="title">AbstractGenericUDAFResolver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Log LOG = LogFactory.getLog(GenericUDAFSum.class.getName());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GenericUDAFEvaluator <span class="title">getEvaluator</span><span class="params">(GenericUDAFParameterInfo info)</span> <span class="keyword">throws</span> SemanticException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getEvaluator(info);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GenericUDAFEvaluator <span class="title">getEvaluator</span><span class="params">(TypeInfo[] info)</span> <span class="keyword">throws</span> SemanticException </span>&#123;</span><br><span class="line">        <span class="comment">// 判断参数个数</span></span><br><span class="line">        <span class="keyword">if</span> (info.length != <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(info.length, <span class="string">"参数个数为1"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 判断参数类型是否合法</span></span><br><span class="line">        <span class="keyword">if</span> (info[<span class="number">0</span>].getCategory() != ObjectInspector.Category.PRIMITIVE) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(<span class="number">0</span>,</span><br><span class="line">                    <span class="string">"Only primitive type arguments are accepted but "</span> + info[<span class="number">0</span>].getTypeName() + <span class="string">" was passed as parameter 1."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不同参数类型，可以生成不同的Evaluator</span></span><br><span class="line">        <span class="keyword">switch</span> (((PrimitiveTypeInfo) info[<span class="number">0</span>]).getPrimitiveCategory()) &#123;</span><br><span class="line">            <span class="keyword">case</span> INT:</span><br><span class="line">            <span class="keyword">case</span> LONG:</span><br><span class="line">            <span class="keyword">case</span> FLOAT:</span><br><span class="line">            <span class="keyword">case</span> SHORT:</span><br><span class="line">            <span class="keyword">case</span> DOUBLE:</span><br><span class="line">            <span class="keyword">case</span> DECIMAL:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> STRING:</span><br><span class="line">            <span class="keyword">case</span> BOOLEAN:</span><br><span class="line">            <span class="keyword">case</span> TIMESTAMP:</span><br><span class="line">            <span class="keyword">case</span> INTERVAL_DAY_TIME:</span><br><span class="line">            <span class="keyword">case</span> INTERVAL_YEAR_MONTH:</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(<span class="number">0</span>,</span><br><span class="line">                        <span class="string">"Only numeric type arguments are accepted but "</span> + info[<span class="number">0</span>].getTypeName() + <span class="string">" was passed as parameter 1."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DecimalEvaluator();</span><br><span class="line">    &#125;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<h3 id="编写evaluator类"><a href="#编写evaluator类" class="headerlink" title="编写evaluator类"></a>编写<code>evaluator</code>类</h3><p>// 此处暂时没有搞的很清楚，先略过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DecimalEvaluator</span> <span class="keyword">extends</span> <span class="title">GenericUDAFEvaluator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ObjectInspector <span class="title">init</span><span class="params">(Mode m, ObjectInspector[] parameters)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.init(m, parameters);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> AggregationBuffer <span class="title">getNewAggregationBuffer</span><span class="params">()</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">(AggregationBuffer agg)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">iterate</span><span class="params">(AggregationBuffer agg, Object[] parameters)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">terminatePartial</span><span class="params">(AggregationBuffer agg)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(AggregationBuffer agg, Object partial)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">terminate</span><span class="params">(AggregationBuffer agg)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UDTF开发"><a href="#UDTF开发" class="headerlink" title="UDTF开发"></a>UDTF开发</h2><h2 id="部署到hive与使用"><a href="#部署到hive与使用" class="headerlink" title="部署到hive与使用"></a>部署到hive与使用</h2><p>部署有两种方式，一种是临时部署，一种是创建永久函数</p>
+<h3 id="临时创建函数"><a href="#临时创建函数" class="headerlink" title="临时创建函数"></a>临时创建函数</h3><p>hive的这个jar文件，通常要放到hdfs上，保证所有节点都可以获取到。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建临时函数</span></span><br><span class="line">hive&gt; ADD jar hdfs:///user/gtding/experiment/hive/hive-0.0.1-SNAPSHOT.jar;</span><br><span class="line"></span><br><span class="line">hive&gt; CREATE TEMPORARY FUNCTION my_len AS "com.iflytek.bigdata.hive.udf.MyLenUDF";</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除临时函数</span></span><br><span class="line">hive&gt; DROP TEMPORARY FUNCTION IF EXIST my_len;</span><br></pre></td></tr></table></figure>
+<h3 id="创建永久函数"><a href="#创建永久函数" class="headerlink" title="创建永久函数"></a>创建永久函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建永久函数</span></span><br><span class="line"><span class="comment">-- 这里可以带上db_name，意思是只能在该db下使用。</span></span><br><span class="line"><span class="comment">-- 通常jar文件是要放在hdfs上的</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> [db_name.]function_name <span class="keyword">AS</span> class_name</span><br><span class="line">  [<span class="keyword">USING</span> JAR|<span class="keyword">FILE</span>|<span class="keyword">ARCHIVE</span> <span class="string">'file_uri'</span> [, JAR|<span class="keyword">FILE</span>|<span class="keyword">ARCHIVE</span> <span class="string">'file_uri'</span>] ];</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除永久函数</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> function_name;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/GenericUDAFCaseStudy" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/GenericUDAFCaseStudy</a></li>
+<li><a href="https://www.jianshu.com/p/ca9dce6b5c37" target="_blank" rel="noopener">https://www.jianshu.com/p/ca9dce6b5c37</a></li>
+<li><a href="https://www.cnblogs.com/itxuexiwang/p/6264547.html" target="_blank" rel="noopener">https://www.cnblogs.com/itxuexiwang/p/6264547.html</a></li>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hive/" rel="tag"># Hive</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/12/10/2017-12-10CountDownLatch%E5%92%8Cjoin%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="2017-12-10CountDownLatch和join的区别">
+                  <i class="fa fa-angle-left"></i> 2017-12-10CountDownLatch和join的区别
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/22/2018-05-22Flume%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/" rel="next" title="Flume日志收集工具">
+                  Flume日志收集工具 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">iclouding</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

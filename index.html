@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dingguotao.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":300},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Hadoop, Spark, OpenStack，Docker">
+<meta property="og:type" content="website">
+<meta property="og:title" content="大数据部落">
+<meta property="og:url" content="https://dingguotao.github.io/index.html">
+<meta property="og:site_name" content="大数据部落">
+<meta property="og:description" content="Hadoop, Spark, OpenStack，Docker">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="iclouding">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dingguotao.github.io/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>大数据部落</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">大数据部落</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hadoop, Spark, OpenStack，Docker</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="iclouding"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">iclouding</p>
+  <div class="site-description" itemprop="description">Hadoop, Spark, OpenStack，Docker</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dingguotao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;dingguotao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2026/11/13/Hadoop%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/11/13/Hadoop%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">Hadoop序列化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-11-13 19:22:03" itemprop="dateCreated datePublished" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Hadoop序列化"><a href="#Hadoop序列化" class="headerlink" title="Hadoop序列化"></a>Hadoop序列化</h1><p>[TOC]</p>
+<hr>
+<p>Hadoop中所有的序列化都实现了Writable的接口，该接口有两个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Writable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 写数据</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(DataOutput out)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 读数据</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">readFields</span><span class="params">(DataInput in)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>Java类型与Writable类型对比</p>
+<table>
+<thead>
+<tr>
+<th>Java基本类型</th>
+<th>Writable</th>
+<th>序列化后长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>布尔型（boolean）</td>
+<td>BooleanWritable</td>
+<td>1</td>
+</tr>
+<tr>
+<td>字节型（byte）</td>
+<td>ByteWritable</td>
+<td>1</td>
+</tr>
+<tr>
+<td>整型（int）</td>
+<td>IntWritable</td>
+<td>4</td>
+</tr>
+<tr>
+<td></td>
+<td>VIntWritable</td>
+<td>1-5</td>
+</tr>
+<tr>
+<td>浮点型（float）</td>
+<td>FloatWritable</td>
+<td>4</td>
+</tr>
+<tr>
+<td>长整型（long）</td>
+<td>LongWritable</td>
+<td>8</td>
+</tr>
+<tr>
+<td></td>
+<td>VLongWritable</td>
+<td>1-9</td>
+</tr>
+<tr>
+<td>双精度浮点型（double）</td>
+<td>DoubleWritable</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>除了char以外，Writable实现了所有的java基本类型，这些都提供set()和get()方法，用来读取或者存储封装的值。</p>
+<p>注意：VIntWritable和VLongWritable是变长格式。</p>
+<ul>
+<li>如果数值在[-127, 127]之间，则使用一个字节来编码</li>
+<li>当不在上述区间，则使用第一个字节表示数值的正负和后跟字节数目</li>
+</ul>
+<h2 id="Text类型"><a href="#Text类型" class="headerlink" title="Text类型"></a>Text类型</h2><p>Text类型是用UTF-8序列的Writable类，类似Java中String，</p>
+<ul>
+<li>getBytes()方法返回Text对象的字节长度</li>
+<li>getLength()方法返回Text对象的长度</li>
+</ul>
+<p>注意：getBytes()是将Text对象利用UTF-8序列化之后的字节数组长度</p>
+<p>​       getLength()是有效字符的个数，一般使用办法是</p>
+<p>一般使用getBytes()之前都要调用getLength()获取长度</p>
+<h2 id="BytesWritable"><a href="#BytesWritable" class="headerlink" title="BytesWritable"></a>BytesWritable</h2><p>BytesWritable是对二进制数据数组的封装。序列化格式：</p>
+<p>一个指定所含数据字节数的整数(4字节)，后面是数据本身。</p>
+<h2 id="NullWritable"><a href="#NullWritable" class="headerlink" title="NullWritable"></a>NullWritable</h2><p>NullWritable是Writable的一个特殊类型，序列化的长度是0</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2020/01/01/2017-05-27%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/01/01/2017-05-27%E5%8D%9A%E5%AE%A2%E6%94%B6%E5%BD%95/" class="post-title-link" itemprop="url">博客收录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00+08:00">2020-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-13 19:22:03" itemprop="dateModified" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="博客收录"><a href="#博客收录" class="headerlink" title="博客收录"></a>博客收录</h1><h2 id="好东西"><a href="#好东西" class="headerlink" title="好东西"></a>好东西</h2><ul>
+<li>这是一个好东西，链接：<a href="http://www.zzcode.cn/vip" target="_blank" rel="noopener">视频解析</a></li>
+</ul>
+<h2 id="Java-多线程"><a href="#Java-多线程" class="headerlink" title="Java 多线程"></a>Java 多线程</h2><ol>
+<li><a href="http://www.cnblogs.com/skywang12345/p/java_threads_category.html" target="_blank" rel="noopener">Java多线程系列目录(共43篇)</a></li>
+<li><a href="http://cmsblogs.com/" target="_blank" rel="noopener">http://cmsblogs.com/</a>   这里写了很多关于Java的。</li>
+</ol>
+<h2 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h2><h2 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h2><h2 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2018/05/29/2018-05-29Flume%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/05/29/2018-05-29Flume%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Flume避坑指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2018-05-29 09:23:24 / 修改时间：19:45:54" itemprop="dateCreated datePublished" datetime="2018-05-29T09:23:24+08:00">2018-05-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>#Flume避坑指南</p>
+<p>使用Memory配置，</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2018</span>-<span class="number">05</span>-<span class="number">25</span> <span class="number">11</span>:<span class="number">36</span>:<span class="number">04</span>,<span class="number">259</span> (SinkRunner-PollingRunner-LoadBalancingSinkProcessor) [ERROR - org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.sink</span><span class="variable">.AbstractRpcSink</span><span class="variable">.process</span>(AbstractRpcSink<span class="variable">.java</span>:<span class="number">384</span>)] Rpc Sink k1: Unable to get <span class="keyword">event</span> from channel c1. Exception follows.</span><br><span class="line">org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.ChannelException</span>: Take list <span class="keyword">for</span> MemoryTransaction, capacity <span class="number">10</span> full, consider committing more frequently, increasing capacity, <span class="keyword">or</span> increasing thread count</span><br><span class="line">	at org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.channel</span><span class="variable">.MemoryChannel</span>$MemoryTransaction<span class="variable">.doTake</span>(MemoryChannel<span class="variable">.java</span>:<span class="number">94</span>)</span><br><span class="line">	at org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.channel</span><span class="variable">.BasicTransactionSemantics</span><span class="variable">.take</span>(BasicTransactionSemantics<span class="variable">.java</span>:<span class="number">113</span>)</span><br><span class="line">	at org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.channel</span><span class="variable">.BasicChannelSemantics</span><span class="variable">.take</span>(BasicChannelSemantics<span class="variable">.java</span>:<span class="number">95</span>)</span><br><span class="line">	at org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.sink</span><span class="variable">.AbstractRpcSink</span><span class="variable">.process</span>(AbstractRpcSink<span class="variable">.java</span>:<span class="number">351</span>)</span><br><span class="line">	at org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.sink</span><span class="variable">.LoadBalancingSinkProcessor</span><span class="variable">.process</span>(LoadBalancingSinkProcessor<span class="variable">.java</span>:<span class="number">156</span>)</span><br><span class="line">	at org<span class="variable">.apache</span><span class="variable">.flume</span><span class="variable">.SinkRunner</span>$PollingRunner<span class="variable">.run</span>(SinkRunner<span class="variable">.java</span>:<span class="number">145</span>)</span><br><span class="line">	at java<span class="variable">.lang</span><span class="variable">.Thread</span><span class="variable">.run</span>(Thread<span class="variable">.java</span>:<span class="number">745</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Flume-Hive-Sink"><a href="#Flume-Hive-Sink" class="headerlink" title="Flume Hive Sink"></a>Flume Hive Sink</h2><p>之前本来计划使用FLume收集到HDFS，再写个定时任务，将数据load进入Hive表，但是，今天发现竟然有个Hive Sink，可以直接流式将数据发送到Hive。看起来是很美好的。。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>如官网介绍，<a href="http://flume.apache.org/FlumeUserGuide.html#hive-sink" target="_blank" rel="noopener">http://flume.apache.org/FlumeUserGuide.html#hive-sink</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>配置hcatalog的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">add_hive_paths</span></span>()&#123;</span><br><span class="line">  <span class="keyword">if</span> [ <span class="_">-d</span> <span class="string">"<span class="variable">$&#123;HIVE_HOME&#125;</span>/lib"</span> ]; <span class="keyword">then</span></span><br><span class="line">    info <span class="string">"Including Hive libraries found via (<span class="variable">$HIVE_HOME</span>) for Hive access"</span></span><br><span class="line">    FLUME_CLASSPATH=<span class="string">"<span class="variable">$FLUME_CLASSPATH</span>:<span class="variable">$HIVE_HOME</span>/lib/*"</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="_">-d</span> <span class="string">"<span class="variable">$&#123;HCAT_HOME&#125;</span>/share/hcatalog"</span> ]; <span class="keyword">then</span></span><br><span class="line">    info <span class="string">"Including HCatalog libraries found via (<span class="variable">$HCAT_HOME</span>) for Hive access"</span></span><br><span class="line">    FLUME_CLASSPATH=<span class="string">"<span class="variable">$FLUME_CLASSPATH</span>:<span class="variable">$&#123;HCAT_HOME&#125;</span>/share/hcatalog/*"</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="hive中对应的表"><a href="#hive中对应的表" class="headerlink" title="hive中对应的表"></a>hive中对应的表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> flume_2_hive_table(</span><br><span class="line">  user_name <span class="keyword">String</span>,</span><br><span class="line">  age <span class="built_in">int</span>,</span><br><span class="line">  score <span class="built_in">int</span>,</span><br><span class="line">  course <span class="keyword">String</span></span><br><span class="line">)</span><br><span class="line">PARTITIONED <span class="keyword">BY</span>(<span class="keyword">year</span> <span class="keyword">String</span>, <span class="keyword">month</span> <span class="keyword">String</span>, <span class="keyword">day</span> <span class="keyword">String</span>)</span><br><span class="line">CLUSTERED <span class="keyword">by</span>(user_name) <span class="keyword">into</span> <span class="number">2</span> buckets</span><br><span class="line"><span class="keyword">STORED</span> <span class="keyword">AS</span> orc</span><br><span class="line">TBLPROPERTIES (<span class="string">"transactional"</span>=<span class="string">"true"</span>,</span><br><span class="line">  <span class="string">"compactor.mapreduce.map.memory.mb"</span>=<span class="string">"2048"</span>,</span><br><span class="line">  <span class="string">"compactorthreshold.hive.compactor.delta.num.threshold"</span>=<span class="string">"4"</span>,</span><br><span class="line">  <span class="string">"compactorthreshold.hive.compactor.delta.pct.threshold"</span>=<span class="string">"0.5"</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2018/05/22/2018-05-22Flume-tailDir-Source%E6%94%B9%E8%BF%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/05/22/2018-05-22Flume-tailDir-Source%E6%94%B9%E8%BF%9B/" class="post-title-link" itemprop="url">Flume tailDir Source改进</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2018-05-22 09:57:09 / 修改时间：10:44:58" itemprop="dateCreated datePublished" datetime="2018-05-22T09:57:09+08:00">2018-05-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Flume-tailDir-Source改进"><a href="#Flume-tailDir-Source改进" class="headerlink" title="Flume tailDir Source改进"></a>Flume tailDir Source改进</h1><h2 id="tailDir简介"><a href="#tailDir简介" class="headerlink" title="tailDir简介"></a>tailDir简介</h2><h2 id="tailDir存在的问题"><a href="#tailDir存在的问题" class="headerlink" title="tailDir存在的问题"></a>tailDir存在的问题</h2><h2 id="tailDir源码修改方法"><a href="#tailDir源码修改方法" class="headerlink" title="tailDir源码修改方法"></a>tailDir源码修改方法</h2><h3 id="Flume中1-7的tailDir源码修改"><a href="#Flume中1-7的tailDir源码修改" class="headerlink" title="Flume中1.7的tailDir源码修改"></a>Flume中1.7的tailDir源码修改</h3><p>这里只需要把这部分的source拿出来重新编译一下就行。</p>
+<p><img src="/2018/05/22/2018-05-22Flume-tailDir-Source改进/tailDir源码.png" alt="tailDir源码"></p>
+<p>导入IDEA 开发工具，重命名一下包名，防止和flume自带的tailDir冲突</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2018/05/22/2018-05-22Flume%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/05/22/2018-05-22Flume%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">Flume日志收集工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2018-05-22 09:56:50 / 修改时间：09:58:56" itemprop="dateCreated datePublished" datetime="2018-05-22T09:56:50+08:00">2018-05-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <hr>
+<h1 id="Flume日志收集工具"><a href="#Flume日志收集工具" class="headerlink" title="Flume日志收集工具"></a>Flume日志收集工具</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2018/05/16/2018-05-16Hive-UDF%E5%92%8CUDAF%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/05/16/2018-05-16Hive-UDF%E5%92%8CUDAF%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Hive UDF和UDAF开发</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-05-16 09:36:21" itemprop="dateCreated datePublished" datetime="2018-05-16T09:36:21+08:00">2018-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2018-05-21 00:05:31" itemprop="dateModified" datetime="2018-05-21T00:05:31+08:00">2018-05-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Hive-UDF、UDAF、UDTF开发"><a href="#Hive-UDF、UDAF、UDTF开发" class="headerlink" title="Hive UDF、UDAF、UDTF开发"></a>Hive UDF、UDAF、UDTF开发</h1><p>[TOC]</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Hive自带了很多聚合，分析函数，见上篇。</p>
+<p>Hive的自定义函数，分为三种：UDF、UDAF、UDTF</p>
+<ul>
+<li>UDF：User Defined Functions，自定义函数，用来处理，输入一行，输出一行的操作，类似MapReduce中Map操作</li>
+<li>UDAF：User Defined Aggregation Functions，自定义聚合函数，用来处理输入多行，输出一行的操作，类似MapReduce中Reduce操作</li>
+<li>UDTF：User Defined Table Generating Functions，自定义表产生函数，用来处理输入一行，输出多行的操作</li>
+</ul>
+<h3 id="pom文件"><a href="#pom文件" class="headerlink" title="pom文件"></a>pom文件</h3><p>pom里增加以下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hive<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hive-exec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="UDF开发"><a href="#UDF开发" class="headerlink" title="UDF开发"></a>UDF开发</h2><p>UDF开发相对比较简单，但是实现起来，通常有两种方式：</p>
+<ul>
+<li>继承基础的UDF接口：函数读取和返回基本类型，即Hadoop和Hive的基本类型。如，Text、IntWritable、LongWritable、DoubleWritable等。</li>
+<li>继承复杂的GenericUDF接口，除了上述的，还可以处理Map、List、Set类型。 </li>
+</ul>
+<blockquote>
+<p>@Describtion注解是可选的，用于对函数进行说明，其中的<em>FUNC</em>字符串表示函数名，当使用DESCRIBE FUNCTION命令时，替换成函数名。@Describtion包含三个属性：</p>
+<ul>
+<li>name：用于指定Hive中的函数名。</li>
+<li>value：用于描述函数的参数。</li>
+<li>extended：额外的说明，如，给出示例。当使用DESCRIBE FUNCTION EXTENDED name的时候打印。</li>
+</ul>
+</blockquote>
+<h3 id="基础UDF开发"><a href="#基础UDF开发" class="headerlink" title="基础UDF开发"></a>基础UDF开发</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLenUDF</span> <span class="keyword">extends</span> <span class="title">UDF</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 要手动去写evaluate这个函数，函数参数可以是多个，类型必须是Hadoop兼容的Writable类型</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> Text col)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> col.getLength();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###GenericUDF接口</p>
+<p>GenericUDF接口比较复杂，要实现以下三个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个方法只调用一次，并且在evaluate()方法之前调用。该方法接受的参数是一个ObjectInspectors数组。该方法检查接受正确的参数类型和参数个数。  </span></span><br><span class="line"><span class="function">ObjectInspector <span class="title">initialize</span><span class="params">(ObjectInspector[] arguments)</span></span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//这个方法类似UDF的evaluate()方法。它处理真实的参数，并返回最终结果。  </span></span><br><span class="line"><span class="function">Object <span class="title">evaluate</span><span class="params">(GenericUDF.DeferredObject[] arguments)</span></span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">//这个方法用于当实现的GenericUDF出错的时候，打印出提示信息。而提示信息就是你实现该方法最后返回的字符串。  </span></span><br><span class="line"><span class="function">String <span class="title">getDisplayString</span><span class="params">(String[] children)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>下面的hive自带的array_contains一个例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Description</span>(name = <span class="string">"array_contains"</span>, value=<span class="string">"_FUNC_(array, value) - Returns TRUE if the array contains value."</span>,</span><br><span class="line">    extended=<span class="string">"Example:\n &gt; SELECT _FUNC_(array(1, 2, 3), 2) FROM src LIMIT 1;\n true"</span>)</span><br><span class="line"><span class="meta">@NDV</span>(maxNdv = <span class="number">2</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericUDFArrayContains</span> <span class="keyword">extends</span> <span class="title">GenericUDF</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组索引</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ARRAY_IDX = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 值索引</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VALUE_IDX = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 个数</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ARG_COUNT = <span class="number">2</span>; <span class="comment">// Number of arguments to this UDF</span></span><br><span class="line">    <span class="comment">// 函数名字</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String FUNC_NAME = <span class="string">"ARRAY_CONTAINS"</span>; <span class="comment">// External Name</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// transient 是不需要序列化的</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> ObjectInspector valueOI;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> ListObjectInspector arrayOI;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> ObjectInspector arrayElementOI;</span><br><span class="line">    <span class="comment">// 结果</span></span><br><span class="line">  <span class="keyword">private</span> BooleanWritable result;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这个进行参数类型检查</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> ObjectInspector <span class="title">initialize</span><span class="params">(ObjectInspector[] arguments)</span></span></span><br><span class="line"><span class="function">      <span class="keyword">throws</span> UDFArgumentException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if two arguments were passed</span></span><br><span class="line">    <span class="keyword">if</span> (arguments.length != ARG_COUNT) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentException(</span><br><span class="line">          <span class="string">"The function "</span> + FUNC_NAME + <span class="string">" accepts "</span></span><br><span class="line">              + ARG_COUNT + <span class="string">" arguments."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if ARRAY_IDX argument is of category LIST</span></span><br><span class="line">    <span class="keyword">if</span> (!arguments[ARRAY_IDX].getCategory().equals(Category.LIST)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(ARRAY_IDX,</span><br><span class="line">          <span class="string">"\""</span> + org.apache.hadoop.hive.serde.serdeConstants.LIST_TYPE_NAME + <span class="string">"\" "</span></span><br><span class="line">          + <span class="string">"expected at function ARRAY_CONTAINS, but "</span></span><br><span class="line">          + <span class="string">"\""</span> + arguments[ARRAY_IDX].getTypeName() + <span class="string">"\" "</span></span><br><span class="line">          + <span class="string">"is found"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    arrayOI = (ListObjectInspector) arguments[ARRAY_IDX];</span><br><span class="line">    arrayElementOI = arrayOI.getListElementObjectInspector();</span><br><span class="line"></span><br><span class="line">    valueOI = arguments[VALUE_IDX];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if list element and value are of same type</span></span><br><span class="line">    <span class="keyword">if</span> (!ObjectInspectorUtils.compareTypes(arrayElementOI, valueOI)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(VALUE_IDX,</span><br><span class="line">          <span class="string">"\""</span> + arrayElementOI.getTypeName() + <span class="string">"\""</span></span><br><span class="line">          + <span class="string">" expected at function ARRAY_CONTAINS, but "</span></span><br><span class="line">          + <span class="string">"\""</span> + valueOI.getTypeName() + <span class="string">"\""</span></span><br><span class="line">          + <span class="string">" is found"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 是否是可比较类型</span></span><br><span class="line">    <span class="keyword">if</span> (!ObjectInspectorUtils.compareSupported(valueOI)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentException(<span class="string">"The function "</span> + FUNC_NAME</span><br><span class="line">          + <span class="string">" does not support comparison for "</span></span><br><span class="line">          + <span class="string">"\""</span> + valueOI.getTypeName() + <span class="string">"\""</span></span><br><span class="line">          + <span class="string">" types"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    result = <span class="keyword">new</span> BooleanWritable(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回Boolean类型返回值</span></span><br><span class="line">    <span class="keyword">return</span> PrimitiveObjectInspectorFactory.writableBooleanObjectInspector;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这个进行挨个比较，查找存在的元素</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">evaluate</span><span class="params">(DeferredObject[] arguments)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">    result.set(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    Object array = arguments[ARRAY_IDX].get();</span><br><span class="line">    Object value = arguments[VALUE_IDX].get();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> arrayLength = arrayOI.getListLength(array);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断数组是否为空</span></span><br><span class="line">    <span class="keyword">if</span> (value == <span class="keyword">null</span> || arrayLength &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 挨个比较</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;arrayLength; ++i) &#123;</span><br><span class="line">      Object listElement = arrayOI.getListElement(array, i);</span><br><span class="line">      <span class="keyword">if</span> (listElement != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ObjectInspectorUtils.compare(value, valueOI, listElement, arrayElementOI) == <span class="number">0</span>) &#123;</span><br><span class="line">          result.set(<span class="keyword">true</span>);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 出错时返回值</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getDisplayString</span><span class="params">(String[] children)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">assert</span> (children.length == ARG_COUNT);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"array_contains("</span> + children[ARRAY_IDX] + <span class="string">", "</span></span><br><span class="line">              + children[VALUE_IDX] + <span class="string">")"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>以上两种实现不同之处是：GenericUDF 可以处理复杂类型参数，并且继承GenericUDF更加有效率，因为UDF class 需要HIve使用反射的方式去实现。 <strong>UDF是作用于一行的。</strong> </p>
+<h2 id="UDAF开发"><a href="#UDAF开发" class="headerlink" title="UDAF开发"></a>UDAF开发</h2><p>hive有两种UDAF：Simple和Generic。</p>
+<ul>
+<li>Simple。即继承<code>org.apache.hadoop.hive.ql.exec.UDAF</code>类，并在派生类中以静态内部类的方式实现<code>org.apache.hadoop.hive.ql.exec.UDAFEvaluator</code>接口。这种方式简单直接，但是在使用过程中需要依赖JAVA反射机制，因此性能相对较低。在Hive源码包<code>org.apache.hadoop.hive.contrib.udaf.example</code>中包含几个示例。。但是这些接口已经被注解为<strong>Deprecated</strong>，建议不要使用这种方式开发新的UDAF函数。</li>
+<li>Generic。这是Hive社区推荐的新的写法，以抽象类代替原有的接口。新的抽象类<code>org.apache.hadoop.hive.ql.udf.generic.AbstractGenericUDAFResolver</code>替代老的UDAF接口，新的抽象类<code>org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator</code>替代老的<code>UDAFEvaluator</code>接口。</li>
+</ul>
+<p><strong>UDAF是需要在hive的sql语句和group by联合使用，hive的group by对于每个分组，只能返回一条记录，这点和mysql不一样，切记。</strong></p>
+<p> Hive开发有两个步骤：</p>
+<ol>
+<li>编写<code>resolver</code>类，resolver负责类型检查，操作符重载。类继承<code>org.apache.hadoop.hive.ql.udf.generic.AbstractGenericUDAFResolver</code>，<code>AbstractGenericUDAFResolver</code>实现了<code>org.apache.hadoop.hive.ql.udf.generic.GenericUDAFResolver2</code>，方便统一接口。</li>
+<li>第二个是编写<code>evaluator</code>类。evaluator真正实现UDAF的逻辑。通常来说，实现<code>org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator</code> ，包括几个必须实现的抽象方法，这几个方法负责完成UDAF所需要处理的逻辑。 </li>
+</ol>
+<h3 id="UDAF的运行流程简介"><a href="#UDAF的运行流程简介" class="headerlink" title="UDAF的运行流程简介"></a>UDAF的运行流程简介</h3><p> 抽象类<code>GenericUDAFEvaluator</code>中，包含一个静态内部枚举类，和一系列抽象方法。这个枚举类的注释中，解释了各个枚举值的运行阶段和运行内容。按照时间先后顺序，分别有：</p>
+<ul>
+<li><p>PARTIAL1：原始数据到部分聚合，调用iterate和terminatePartial –&gt; map阶段</p>
+</li>
+<li><p>PARTIAL2: 部分聚合到部分聚合，调用merge和terminatePartial –&gt; combine阶段</p>
+</li>
+<li><p>FINAL: 部分聚合到完全聚合，调用merge和terminate –&gt; reduce阶段</p>
+</li>
+<li><p>COMPLETE: 从原始数据直接到完全聚合 –&gt; map阶段，并且没有reduce</p>
+<p>那么，这几个方法分别干了些啥呢？</p>
+</li>
+<li><p><code>init(Mode m, ObjectInspector[] parameters)</code>: 这个是非必须的，但是一般是需要的。实例化Evaluator类的时候调用的，在不同的阶段需要返回不同的OI。需要注意的是，在不同的模式下parameters的含义是不同的，比如m为 PARTIAL1 和 COMPLETE 时，parameters为原始数据；m为 PARTIAL2 和 FINAL 时，parameters仅为部分聚合数据（只有一个元素）。在 PARTIAL1 和 PARTIAL2 模式下，ObjectInspector  用于terminatePartial方法的返回值，在FINAL和COMPLETE模式下ObjectInspector 用于terminate方法的返回值。 其入参和返回值，以及Mode阶段的关系如下表：</p>
+<p>|          | 入参         | 返回值的使用者   |<br>| ——– | ———— | —————- |<br>| PARTIAL1 | 原始数据     | terminatePartial |<br>| PARTIAL2 | 部分聚合数据 | terminatePartial |<br>| FINAL    | 部分聚合数据 | terminate        |<br>| COMPLETE | 原始数据     | terminate        |</p>
+</li>
+<li><p><code>getNewAggregationBuffer()</code>: 返回存储临时聚合结果的AggregationBuffer对象</p>
+</li>
+<li><p><code>reset(AggregationBuffer agg)</code>: 重置聚合结果对象，以支持mapper和reducer的重用。</p>
+</li>
+<li><p><code>iterate(AggregationBuffer agg, Object[] parameters)</code>：迭代处理原始数据parameters并保存到agg中</p>
+</li>
+<li><p><code>terminatePartial(AggregationBuffer agg)</code>：返回部分聚合数据的持久化对象。因为调用这个方法时，说明已经是map或者combine的结束了，必须将数据持久化以后交给reduce进行处理。只支持JAVA原始数据类型及其封装类型、<strong>HADOOP Writable类型、List、Map</strong>，<strong>不能返回自定义的类，即使实现了Serializable也不行</strong>，否则会出现问题或者错误的结果。</p>
+</li>
+<li><p><code>merge(AggregationBuffer agg, Object partial)</code>：将<code>terminatePartial</code>返回的部分聚合数据进行合并，需要使用到对应的OI。</p>
+</li>
+<li><p><code>terminate(AggregationBuffer agg)</code>：返回最终结果。 </p>
+</li>
+</ul>
+<h3 id="编写resolver类"><a href="#编写resolver类" class="headerlink" title="编写resolver类"></a>编写<code>resolver</code>类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySumUDAF</span> <span class="keyword">extends</span> <span class="title">AbstractGenericUDAFResolver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> Log LOG = LogFactory.getLog(GenericUDAFSum.class.getName());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GenericUDAFEvaluator <span class="title">getEvaluator</span><span class="params">(GenericUDAFParameterInfo info)</span> <span class="keyword">throws</span> SemanticException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getEvaluator(info);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GenericUDAFEvaluator <span class="title">getEvaluator</span><span class="params">(TypeInfo[] info)</span> <span class="keyword">throws</span> SemanticException </span>&#123;</span><br><span class="line">        <span class="comment">// 判断参数个数</span></span><br><span class="line">        <span class="keyword">if</span> (info.length != <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(info.length, <span class="string">"参数个数为1"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 判断参数类型是否合法</span></span><br><span class="line">        <span class="keyword">if</span> (info[<span class="number">0</span>].getCategory() != ObjectInspector.Category.PRIMITIVE) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(<span class="number">0</span>,</span><br><span class="line">                    <span class="string">"Only primitive type arguments are accepted but "</span> + info[<span class="number">0</span>].getTypeName() + <span class="string">" was passed as parameter 1."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不同参数类型，可以生成不同的Evaluator</span></span><br><span class="line">        <span class="keyword">switch</span> (((PrimitiveTypeInfo) info[<span class="number">0</span>]).getPrimitiveCategory()) &#123;</span><br><span class="line">            <span class="keyword">case</span> INT:</span><br><span class="line">            <span class="keyword">case</span> LONG:</span><br><span class="line">            <span class="keyword">case</span> FLOAT:</span><br><span class="line">            <span class="keyword">case</span> SHORT:</span><br><span class="line">            <span class="keyword">case</span> DOUBLE:</span><br><span class="line">            <span class="keyword">case</span> DECIMAL:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> STRING:</span><br><span class="line">            <span class="keyword">case</span> BOOLEAN:</span><br><span class="line">            <span class="keyword">case</span> TIMESTAMP:</span><br><span class="line">            <span class="keyword">case</span> INTERVAL_DAY_TIME:</span><br><span class="line">            <span class="keyword">case</span> INTERVAL_YEAR_MONTH:</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UDFArgumentTypeException(<span class="number">0</span>,</span><br><span class="line">                        <span class="string">"Only numeric type arguments are accepted but "</span> + info[<span class="number">0</span>].getTypeName() + <span class="string">" was passed as parameter 1."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DecimalEvaluator();</span><br><span class="line">    &#125;</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<h3 id="编写evaluator类"><a href="#编写evaluator类" class="headerlink" title="编写evaluator类"></a>编写<code>evaluator</code>类</h3><p>// 此处暂时没有搞的很清楚，先略过</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DecimalEvaluator</span> <span class="keyword">extends</span> <span class="title">GenericUDAFEvaluator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> ObjectInspector <span class="title">init</span><span class="params">(Mode m, ObjectInspector[] parameters)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.init(m, parameters);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> AggregationBuffer <span class="title">getNewAggregationBuffer</span><span class="params">()</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">(AggregationBuffer agg)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">iterate</span><span class="params">(AggregationBuffer agg, Object[] parameters)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">terminatePartial</span><span class="params">(AggregationBuffer agg)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(AggregationBuffer agg, Object partial)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">terminate</span><span class="params">(AggregationBuffer agg)</span> <span class="keyword">throws</span> HiveException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UDTF开发"><a href="#UDTF开发" class="headerlink" title="UDTF开发"></a>UDTF开发</h2><h2 id="部署到hive与使用"><a href="#部署到hive与使用" class="headerlink" title="部署到hive与使用"></a>部署到hive与使用</h2><p>部署有两种方式，一种是临时部署，一种是创建永久函数</p>
+<h3 id="临时创建函数"><a href="#临时创建函数" class="headerlink" title="临时创建函数"></a>临时创建函数</h3><p>hive的这个jar文件，通常要放到hdfs上，保证所有节点都可以获取到。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建临时函数</span></span><br><span class="line">hive&gt; ADD jar hdfs:///user/gtding/experiment/hive/hive-0.0.1-SNAPSHOT.jar;</span><br><span class="line"></span><br><span class="line">hive&gt; CREATE TEMPORARY FUNCTION my_len AS "com.iflytek.bigdata.hive.udf.MyLenUDF";</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除临时函数</span></span><br><span class="line">hive&gt; DROP TEMPORARY FUNCTION IF EXIST my_len;</span><br></pre></td></tr></table></figure>
+<h3 id="创建永久函数"><a href="#创建永久函数" class="headerlink" title="创建永久函数"></a>创建永久函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建永久函数</span></span><br><span class="line"><span class="comment">-- 这里可以带上db_name，意思是只能在该db下使用。</span></span><br><span class="line"><span class="comment">-- 通常jar文件是要放在hdfs上的</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> [db_name.]function_name <span class="keyword">AS</span> class_name</span><br><span class="line">  [<span class="keyword">USING</span> JAR|<span class="keyword">FILE</span>|<span class="keyword">ARCHIVE</span> <span class="string">'file_uri'</span> [, JAR|<span class="keyword">FILE</span>|<span class="keyword">ARCHIVE</span> <span class="string">'file_uri'</span>] ];</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除永久函数</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">FUNCTION</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> function_name;</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/GenericUDAFCaseStudy" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/GenericUDAFCaseStudy</a></li>
+<li><a href="https://www.jianshu.com/p/ca9dce6b5c37" target="_blank" rel="noopener">https://www.jianshu.com/p/ca9dce6b5c37</a></li>
+<li><a href="https://www.cnblogs.com/itxuexiwang/p/6264547.html" target="_blank" rel="noopener">https://www.cnblogs.com/itxuexiwang/p/6264547.html</a></li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2017/12/10/2017-12-10CountDownLatch%E5%92%8Cjoin%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/12/10/2017-12-10CountDownLatch%E5%92%8Cjoin%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">2017-12-10CountDownLatch和join的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2017-12-10 14:31:33 / 修改时间：14:33:25" itemprop="dateCreated datePublished" datetime="2017-12-10T14:31:33+08:00">2017-12-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p> 最近在使用多线程的时候，发觉join和CountDownLatch的功能很相似，但是自己不是很清楚其内部区别，学习一下，方便以后应用。</p>
+</blockquote>
+<h1 id="CountDownLatch和join的区别"><a href="#CountDownLatch和join的区别" class="headerlink" title="CountDownLatch和join的区别"></a>CountDownLatch和join的区别</h1><p>[TOC]</p>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2017/09/29/2017-09-29Superset%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/09/29/2017-09-29Superset%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">2017-09-29Superset数据分析与使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-09-29 11:05:27" itemprop="dateCreated datePublished" datetime="2017-09-29T11:05:27+08:00">2017-09-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-13 19:22:03" itemprop="dateModified" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Superset数据分析与使用"><a href="#Superset数据分析与使用" class="headerlink" title="Superset数据分析与使用"></a>Superset数据分析与使用</h1><p>之前已经测试完成了superset搭建与链接hive</p>
+<p>此处则通过链接hive，对hive数据进行分析。</p>
+<h2 id="为hive生成测试数据"><a href="#为hive生成测试数据" class="headerlink" title="为hive生成测试数据"></a>为hive生成测试数据</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">Slave2:~ <span class="comment"># beeline</span></span><br><span class="line">17/09/29 11:03:43 WARN mapreduce.TableMapReduceUtil: The hbase-prefix-tree module jar containing PrefixTreeCodec is not present.  Continuing without it.</span><br><span class="line">Beeline version 1.1.0-cdh5.8.0 by Apache Hive</span><br><span class="line">beeline&gt; !connect jdbc:hive2://172.31.3.123:10000</span><br><span class="line">scan complete <span class="keyword">in</span> 2ms</span><br><span class="line">Connecting to jdbc:hive2://172.31.3.123:10000</span><br><span class="line">Enter username <span class="keyword">for</span> jdbc:hive2://172.31.3.123:10000: </span><br><span class="line">Enter password <span class="keyword">for</span> jdbc:hive2://172.31.3.123:10000: </span><br><span class="line">Connected to: Apache Hive (version 1.1.0-cdh5.8.0)</span><br><span class="line">Driver: Hive JDBC (version 1.1.0-cdh5.8.0)</span><br><span class="line">Transaction isolation: TRANSACTION_REPEATABLE_READ</span><br><span class="line">0: jdbc:hive2://172.31.3.123:10000&gt; </span><br><span class="line">: jdbc:hive2://172.31.3.123:10000&gt; create table student (</span><br><span class="line">. . . . . . . . . . . . . . . . . &gt; id int,</span><br><span class="line">. . . . . . . . . . . . . . . . . &gt; name string,</span><br><span class="line">. . . . . . . . . . . . . . . . . &gt; chinese <span class="built_in">float</span>,</span><br><span class="line">. . . . . . . . . . . . . . . . . &gt; english <span class="built_in">float</span>,</span><br><span class="line">. . . . . . . . . . . . . . . . . &gt; math    <span class="built_in">float</span></span><br><span class="line">. . . . . . . . . . . . . . . . . &gt; )ROW FORMAT DELIMITED FIELDS TERMINATED BY <span class="string">','</span>;</span><br><span class="line">INFO  : Compiling <span class="built_in">command</span>(queryId=hive_20170929110808_47a8171f<span class="_">-d</span>18d-45d8-9e93-9a7164c31d89): create table student (</span><br><span class="line">id int,</span><br><span class="line">name string,</span><br><span class="line">chinese <span class="built_in">float</span>,</span><br><span class="line">english <span class="built_in">float</span>,</span><br><span class="line">math    <span class="built_in">float</span></span><br><span class="line">)ROW FORMAT DELIMITED FIELDS TERMINATED BY <span class="string">','</span></span><br><span class="line">INFO  : Semantic Analysis Completed</span><br><span class="line">INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)</span><br><span class="line">INFO  : Completed compiling <span class="built_in">command</span>(queryId=hive_20170929110808_47a8171f<span class="_">-d</span>18d-45d8-9e93-9a7164c31d89); Time taken: 0.056 seconds</span><br><span class="line">INFO  : Executing <span class="built_in">command</span>(queryId=hive_20170929110808_47a8171f<span class="_">-d</span>18d-45d8-9e93-9a7164c31d89): create table student (</span><br><span class="line">id int,</span><br><span class="line">name string,</span><br><span class="line">chinese <span class="built_in">float</span>,</span><br><span class="line">english <span class="built_in">float</span>,</span><br><span class="line">math    <span class="built_in">float</span></span><br><span class="line">)ROW FORMAT DELIMITED FIELDS TERMINATED BY <span class="string">','</span></span><br><span class="line">INFO  : Starting task [Stage-0:DDL] <span class="keyword">in</span> serial mode</span><br><span class="line">INFO  : Completed executing <span class="built_in">command</span>(queryId=hive_20170929110808_47a8171f<span class="_">-d</span>18d-45d8-9e93-9a7164c31d89); Time taken: 0.572 seconds</span><br><span class="line">INFO  : OK</span><br><span class="line">No rows affected (0.829 seconds)</span><br><span class="line">0: jdbc:hive2://172.31.3.123:10000&gt; show tables;</span><br><span class="line">INFO  : Compiling <span class="built_in">command</span>(queryId=hive_20170929110909_ae20419d-4a20-4d71<span class="_">-a</span>34f-593<span class="built_in">cd</span>6cfd7f2): show tables</span><br><span class="line">INFO  : Semantic Analysis Completed</span><br><span class="line">INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:tab_name, <span class="built_in">type</span>:string, comment:from deserializer)], properties:null)</span><br><span class="line">INFO  : Completed compiling <span class="built_in">command</span>(queryId=hive_20170929110909_ae20419d-4a20-4d71<span class="_">-a</span>34f-593<span class="built_in">cd</span>6cfd7f2); Time taken: 0.008 seconds</span><br><span class="line">INFO  : Executing <span class="built_in">command</span>(queryId=hive_20170929110909_ae20419d-4a20-4d71<span class="_">-a</span>34f-593<span class="built_in">cd</span>6cfd7f2): show tables</span><br><span class="line">INFO  : Starting task [Stage-0:DDL] <span class="keyword">in</span> serial mode</span><br><span class="line">INFO  : Completed executing <span class="built_in">command</span>(queryId=hive_20170929110909_ae20419d-4a20-4d71<span class="_">-a</span>34f-593<span class="built_in">cd</span>6cfd7f2); Time taken: 0.019 seconds</span><br><span class="line">INFO  : OK</span><br><span class="line">+--------------------+--+</span><br><span class="line">|      tab_name      |</span><br><span class="line">+--------------------+--+</span><br><span class="line">| dm_ica_dhcl_day_2  |</span><br><span class="line">| es_prpcmain        |</span><br><span class="line">| kmeans             |</span><br><span class="line">| log_user           |</span><br><span class="line">| part_test          |</span><br><span class="line">| student            |</span><br><span class="line">+--------------------+--+</span><br><span class="line">6 rows selected (0.099 seconds)</span><br><span class="line">0: jdbc:hive2://172.31.3.123:10000&gt; LOAD DATA LOCAL INPATH <span class="string">'/ding/student.data'</span> INTO TABLE student;</span><br><span class="line">INFO  : Compiling <span class="built_in">command</span>(queryId=hive_20170929113030_6992e64a-bf6f-4a8b-8afa<span class="_">-a</span>8677a777570): LOAD DATA LOCAL INPATH <span class="string">'/ding/student.data'</span> INTO TABLE student</span><br><span class="line">INFO  : Semantic Analysis Completed</span><br><span class="line">INFO  : Returning Hive schema: Schema(fieldSchemas:null, properties:null)</span><br><span class="line">INFO  : Completed compiling <span class="built_in">command</span>(queryId=hive_20170929113030_6992e64a-bf6f-4a8b-8afa<span class="_">-a</span>8677a777570); Time taken: 0.051 seconds</span><br><span class="line">INFO  : Executing <span class="built_in">command</span>(queryId=hive_20170929113030_6992e64a-bf6f-4a8b-8afa<span class="_">-a</span>8677a777570): LOAD DATA LOCAL INPATH <span class="string">'/ding/student.data'</span> INTO TABLE student</span><br><span class="line">INFO  : Starting task [Stage-0:MOVE] <span class="keyword">in</span> serial mode</span><br><span class="line">INFO  : Loading data to table default.student from file:/ding/student.data</span><br><span class="line">INFO  : Starting task [Stage-1:STATS] <span class="keyword">in</span> serial mode</span><br><span class="line">INFO  : Table default.student stats: [numFiles=1, totalSize=167]</span><br><span class="line">INFO  : Completed executing <span class="built_in">command</span>(queryId=hive_20170929113030_6992e64a-bf6f-4a8b-8afa<span class="_">-a</span>8677a777570); Time taken: 0.902 seconds</span><br><span class="line">INFO  : OK</span><br><span class="line">No rows affected (1.381 seconds)</span><br><span class="line">0: jdbc:hive2://172.31.3.123:10000&gt; select * from student;</span><br><span class="line">INFO  : Compiling <span class="built_in">command</span>(queryId=hive_20170929113030_b63083dc<span class="_">-a</span>055-4c00-864a<span class="_">-a</span>0514b471765): select * from student</span><br><span class="line">INFO  : Semantic Analysis Completed</span><br><span class="line">INFO  : Returning Hive schema: Schema(fieldSchemas:[FieldSchema(name:student.id, <span class="built_in">type</span>:int, comment:null), FieldSchema(name:student.name, <span class="built_in">type</span>:string, comment:null), FieldSchema(name:student.chinese, <span class="built_in">type</span>:<span class="built_in">float</span>, comment:null), FieldSchema(name:student.english, <span class="built_in">type</span>:<span class="built_in">float</span>, comment:null), FieldSchema(name:student.math, <span class="built_in">type</span>:<span class="built_in">float</span>, comment:null)], properties:null)</span><br><span class="line">INFO  : Completed compiling <span class="built_in">command</span>(queryId=hive_20170929113030_b63083dc<span class="_">-a</span>055-4c00-864a<span class="_">-a</span>0514b471765); Time taken: 0.135 seconds</span><br><span class="line">INFO  : Executing <span class="built_in">command</span>(queryId=hive_20170929113030_b63083dc<span class="_">-a</span>055-4c00-864a<span class="_">-a</span>0514b471765): select * from student</span><br><span class="line">INFO  : Completed executing <span class="built_in">command</span>(queryId=hive_20170929113030_b63083dc<span class="_">-a</span>055-4c00-864a<span class="_">-a</span>0514b471765); Time taken: 0.002 seconds</span><br><span class="line">INFO  : OK</span><br><span class="line">+-------------+---------------+------------------+------------------+---------------+--+</span><br><span class="line">| student.id  | student.name  | student.chinese  | student.english  | student.math  |</span><br><span class="line">+-------------+---------------+------------------+------------------+---------------+--+</span><br><span class="line">| 1           | zhangsan      | 80.0             | 90.0             | 80.0          |</span><br><span class="line">| 2           | lisi          | 70.0             | 100.0            | 60.0          |</span><br><span class="line">| 3           | wangwu        | 90.0             | 90.0             | 80.0          |</span><br><span class="line">| 4           | zhaoliu       | 60.0             | 80.0             | 100.0         |</span><br><span class="line">| 5           | zhaoqian      | 50.0             | 60.0             | 40.0          |</span><br><span class="line">| 6           | sunli         | 85.0             | 95.0             | 95.0          |</span><br><span class="line">| 7           | zhouwu        | 60.0             | 80.0             | 59.0          |</span><br><span class="line">| 8           | zhengwang     | 65.0             | 95.0             | 75.0          |</span><br><span class="line">+-------------+---------------+------------------+------------------+---------------+--+</span><br><span class="line">8 rows selected (6.187 seconds)</span><br></pre></td></tr></table></figure>
+<p>其中测试数据集如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Slave1:/ # cat /ding/student.data </span><br><span class="line">001,zhangsan,80,90,80</span><br><span class="line">002,lisi,70,100,60</span><br><span class="line">003,wangwu,90,90,80</span><br><span class="line">004,zhaoliu,60,80,100</span><br><span class="line">005,zhaoqian,50,60,40</span><br><span class="line">006,sunli,85,95,95</span><br><span class="line">007,zhouwu,60,80,59</span><br><span class="line">008,zhengwang,65,95,75</span><br></pre></td></tr></table></figure>
+<h2 id="superset连接hive数据源"><a href="#superset连接hive数据源" class="headerlink" title="superset连接hive数据源"></a>superset连接hive数据源</h2><p>新加一个Database，如下图</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/superset链接hive.png" alt="superset链接hive"></p>
+<p>其中URI中填写<code>hive://172.31.3.123:10000/default?auth=NONE</code>，之后点<code>Test Connection</code>会出现<code>Seem OK</code>的字样。之后会显示出来所有的表</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/展示所有的表.png" alt="展示所有的表"></p>
+<p>点击保存。然后再去<code>Sources</code>→<code>Tables</code>选项中</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/addTablePre.png" alt="addTablePre"></p>
+<p>如下图</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/addTable.png" alt="addTable"></p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/addTable2.png" alt="addTable2"></p>
+<p>之后跳转到展示所有table的界面</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/ListTables.png" alt="ListTables"></p>
+<p>点击左边的<code>Edit Record</code></p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/EditRecord.png" alt="EditRecord"></p>
+<p>编辑表，勾上我们要分析的几列，如下图</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/EditTable.png" alt="EditTable"></p>
+<p>至此，hive数据表链接与配置完毕</p>
+<ul>
+<li>如果想要使用某个列进行分组，那么将该列标记为<strong>Groupable</strong></li>
+<li>如果想要使用某个列进行过滤，那么将该列标记为<strong>Filterable</strong></li>
+<li>如果想要在某列上进行count distinct，那么将该列标记为<strong>Count Distinct</strong></li>
+<li>如果想要对某列进行求和，或者进行简单的统计，那么将该列标记为<strong>Sum</strong>、<strong>Min</strong>、<strong>Max</strong></li>
+<li>任何时间或日期类型的列，都应该被标记为<strong>temporal</strong></li>
+</ul>
+<h2 id="superset数据分析及报表展示"><a href="#superset数据分析及报表展示" class="headerlink" title="superset数据分析及报表展示"></a>superset数据分析及报表展示</h2><p>先做个简单的，查询全部数据</p>
+<p>如图</p>
+<p><img src="/2017/09/29/2017-09-29Superset数据分析与使用/查询全部数据.png" alt="查询全部数据"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://blog.claves.me/2017/05/06/superset-sunbrust/" target="_blank" rel="noopener">https://blog.claves.me/2017/05/06/superset-sunbrust/</a></li>
+<li><a href="https://blog.claves.me/2017/05/06/superset-histogram/" target="_blank" rel="noopener">https://blog.claves.me/2017/05/06/superset-histogram/</a></li>
+<li><a href="http://lxw1234.com/archives/2016/06/691.htm" target="_blank" rel="noopener">http://lxw1234.com/archives/2016/06/691.htm</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2017/09/22/2017-09-22Spark1-X%E5%92%8C2-X%E7%BC%96%E8%AF%91%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/09/22/2017-09-22Spark1-X%E5%92%8C2-X%E7%BC%96%E8%AF%91%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">2017-09-22Spark1.X和2.X编译部署</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-09-22 19:00:29" itemprop="dateCreated datePublished" datetime="2017-09-22T19:00:29+08:00">2017-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-13 19:22:03" itemprop="dateModified" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Spark编译部署"><a href="#Spark编译部署" class="headerlink" title="Spark编译部署"></a>Spark编译部署</h1><h2 id="Spark1-6"><a href="#Spark1-6" class="headerlink" title="Spark1.6"></a>Spark1.6</h2><h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>下载源码包：<a href="http://spark.apache.org/downloads.html" target="_blank" rel="noopener">http://spark.apache.org/downloads.html</a></p>
+<p>安装maven（maven3.3以上版本，低版本会报错）</p>
+<p>安装java</p>
+<p>配置maven编译时内存大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> MAVEN_OPTS=<span class="string">"-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"</span></span><br></pre></td></tr></table></figure>
+<p>如果机器配置好，可以适当增大内存。</p>
+<p>编译和打包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./make-distribution.sh --name hadoop-2.6.0-cdh5.8.0 --tgz -Pyarn -Phadoop-2.6 -Dhadoop.version=2.6.0-cdh5.8.0 -Dyarn.version=2.6.0-cdh5.8.0  -Psparkr -Phive -Phive-thriftserver -DskipTests</span><br></pre></td></tr></table></figure>
+<p>其中，编译参数里指定对yarn和hive进行支持，hadoop版本是2.6.0-5.8.0，后面可以根据hadoop主板本的变化而弹性改变。默认<code>make-distribution.sh</code> 脚本里有编译过程</p>
+<p>执行完成后，会在根目录下有如下tgz包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spark-1.6.3-bin-hadoop-2.6.0-cdh5.8.0.tgz</span><br></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>由于本次安装的是Spark On Yarn模式，因此需要hadoop-client的支持。</p>
+<p>选择的机器是172.31.3.122，此机器默认没有安装hadoop-client</p>
+<h4 id="增加cloudera-hadoop的源"><a href="#增加cloudera-hadoop的源" class="headerlink" title="增加cloudera-hadoop的源"></a>增加cloudera-hadoop的源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Master:~ <span class="comment"># cd /etc/zypp/repos.d/</span></span><br><span class="line">Master:/etc/zypp/repos.d <span class="comment"># cat cdh.repo </span></span><br><span class="line">[cloudera-hadoop]</span><br><span class="line">name=Cloudera Hadoop</span><br><span class="line">enabled=1</span><br><span class="line">autorefresh=0</span><br><span class="line">baseurl=http://archive.cloudera.com/cdh5/sles/11/x86_64/cdh/5.8.0/</span><br><span class="line"><span class="built_in">type</span>=rpm-md</span><br><span class="line">gpgcheck=0</span><br><span class="line">gpgkey=https://archive.cloudera.com/redhat/cdh/RPM-GPG-KEY-cloudera</span><br></pre></td></tr></table></figure>
+<h4 id="安装hadoop-client"><a href="#安装hadoop-client" class="headerlink" title="安装hadoop-client"></a>安装hadoop-client</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zypper install hadoop-client</span><br><span class="line"><span class="comment"># 此处网络比较慢，可以自行下载下来，再传上去安装</span></span><br><span class="line"><span class="comment"># 网址：http://archive.cloudera.com/cdh5/sles/11/x86_64/cdh/5.8.0/RPMS</span></span><br><span class="line"><span class="comment"># 需要下载的包：avro-libs bigtop-jsvc bigtop-utils hadoop hadoop-0.20-mapreduce hadoop-client hadoop-hdfs hadoop-mapreduce hadoop-yarn parquet parquet-format zookeeper</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>拷贝其他节点的hadoop/conf下文件到本机的/etc/hadoop/conf目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/hadoop/conf/*  172.31.3.122:/etc/hadoop/conf/</span><br><span class="line"><span class="comment"># 推荐使用rsync工具，可以同步属性等信息</span></span><br><span class="line">rsync -lrP 源目录  目标目录</span><br><span class="line">Usage: rsync [OPTION]... SRC [SRC]... DEST</span><br><span class="line">  or   rsync [OPTION]... SRC [SRC]... [USER@]HOST:DEST</span><br><span class="line">  or   rsync [OPTION]... SRC [SRC]... [USER@]HOST::DEST</span><br><span class="line">  or   rsync [OPTION]... SRC [SRC]... rsync://[USER@]HOST[:PORT]/DEST</span><br><span class="line">  or   rsync [OPTION]... [USER@]HOST:SRC [DEST]</span><br><span class="line">  or   rsync [OPTION]... [USER@]HOST::SRC [DEST]</span><br><span class="line">  or   rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]</span><br></pre></td></tr></table></figure>
+<h4 id="安装Spark"><a href="#安装Spark" class="headerlink" title="安装Spark"></a>安装Spark</h4><p>拷贝之前打包的Spark1.6.3-cdh5.8.0版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解压</span></span><br><span class="line">Master:~ <span class="comment"># tar xvf spark-1.6.3-bin-hadoop-2.6.0-cdh5.8.0.tgz -C /usr/local/</span></span><br><span class="line"><span class="comment"># 做个快捷方式</span></span><br><span class="line">Master:/usr/<span class="built_in">local</span> <span class="comment"># ln -s spark spark-1.6.3-bin-hadoop-2.6.0-cdh5.8.0</span></span><br><span class="line"><span class="comment"># 配置环境变量</span></span><br><span class="line">Master:/usr/<span class="built_in">local</span> <span class="comment"># vim /etc/profile</span></span><br><span class="line"><span class="built_in">export</span> SPARK_HOME=/usr/<span class="built_in">local</span>/spark</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$SPARK_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置Spark"><a href="#配置Spark" class="headerlink" title="配置Spark"></a>配置Spark</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Master:/usr/<span class="built_in">local</span>/spark/conf <span class="comment"># ll</span></span><br><span class="line">Master:/usr/<span class="built_in">local</span>/spark/conf <span class="comment"># mv spark-env.sh.template spark-env.sh</span></span><br><span class="line">Master:/usr/<span class="built_in">local</span>/spark/conf <span class="comment"># mv spark-defaults.conf.template spark-defaults.conf</span></span><br></pre></td></tr></table></figure>
+<p>配置spark-env.sh文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Master:/usr/<span class="built_in">local</span>/spark/conf <span class="comment"># vim spark-env.sh </span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.7.0_80</span><br><span class="line"><span class="built_in">export</span> HADOOP_CONF_DIR=/etc/hadoop/conf</span><br></pre></td></tr></table></figure>
+<p>配置spark-default.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat spark-defaults.conf </span><br><span class="line">spark.master                       yarn-client</span><br><span class="line">spark.eventLog.enabled             <span class="literal">true</span></span><br><span class="line">spark.eventLog.dir                 hdfs://Slave1:8020/user/spark/applicationHistory</span><br><span class="line">spark.serializer                   org.apache.spark.serializer.KryoSerializer</span><br><span class="line">spark.executor.extraJavaOptions    -XX:+PrintGCDetails</span><br></pre></td></tr></table></figure>
+<p>也可以配置一下log的级别</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv <span class="built_in">log</span>4j.properties.template <span class="built_in">log</span>4j.properties</span><br><span class="line">将<span class="built_in">log</span>4j.rootCategory=INFO, console  改成</span><br><span class="line">  <span class="built_in">log</span>4j.rootCategory=WARN, console</span><br></pre></td></tr></table></figure>
+<p>对hive进行支持</p>
+<p>讲hive-site.xml拷贝到/usr/local/spark/conf目录中去</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>使用spark-shell验证安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line">Master:~ <span class="comment"># spark-shell</span></span><br><span class="line">Welcome to</span><br><span class="line">      ____              __</span><br><span class="line">     / __/__  ___ _____/ /__</span><br><span class="line">    _\ \/ _ \/ _ `/ __/  <span class="string">'_/</span></span><br><span class="line"><span class="string">   /___/ .__/\_,_/_/ /_/\_\   version 1.6.3</span></span><br><span class="line"><span class="string">      /_/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Using Scala version 2.10.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_80)</span></span><br><span class="line"><span class="string">Type in expressions to have them evaluated.</span></span><br><span class="line"><span class="string">Type :help for more information.</span></span><br><span class="line"><span class="string">17/09/22 18:18:42 WARN Utils: Service '</span>SparkUI<span class="string">' could not bind on port 4040. Attempting port 4041.</span></span><br><span class="line"><span class="string">17/09/22 18:18:43 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span></span><br><span class="line"><span class="string">Spark context available as sc.</span></span><br><span class="line"><span class="string">17/09/22 18:18:54 WARN General: Plugin (Bundle) "org.datanucleus.store.rdbms" is already registered. Ensure you dont have multiple JAR versions of the same plugin in the classpath. The URL "file:/usr/local/spark-1.6.3-bin-hadoop-2.6.0-cdh5.8.0/lib/datanucleus-rdbms-3.2.9.jar" is already registered, and you are trying to register an identical plugin located at URL "file:/usr/local/spark/lib/datanucleus-rdbms-3.2.9.jar."</span></span><br><span class="line"><span class="string">17/09/22 18:18:54 WARN General: Plugin (Bundle) "org.datanucleus.api.jdo" is already registered. Ensure you dont have multiple JAR versions of the same plugin in the classpath. The URL "file:/usr/local/spark-1.6.3-bin-hadoop-2.6.0-cdh5.8.0/lib/datanucleus-api-jdo-3.2.6.jar" is already registered, and you are trying to register an identical plugin located at URL "file:/usr/local/spark/lib/datanucleus-api-jdo-3.2.6.jar."</span></span><br><span class="line"><span class="string">17/09/22 18:18:54 WARN General: Plugin (Bundle) "org.datanucleus" is already registered. Ensure you dont have multiple JAR versions of the same plugin in the classpath. The URL "file:/usr/local/spark-1.6.3-bin-hadoop-2.6.0-cdh5.8.0/lib/datanucleus-core-3.2.10.jar" is already registered, and you are trying to register an identical plugin located at URL "file:/usr/local/spark/lib/datanucleus-core-3.2.10.jar."</span></span><br><span class="line"><span class="string">17/09/22 18:18:54 WARN Connection: BoneCP specified but not present in CLASSPATH (or one of dependencies)</span></span><br><span class="line"><span class="string">17/09/22 18:18:54 WARN Connection: BoneCP specified but not present in CLASSPATH (or one of dependencies)</span></span><br><span class="line"><span class="string">17/09/22 18:19:24 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0</span></span><br><span class="line"><span class="string">17/09/22 18:19:24 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException</span></span><br><span class="line"><span class="string">SQL context available as sqlContext.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">scala&gt; </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">scala&gt; sqlContext.sql("show tables").show</span></span><br><span class="line"><span class="string">+-----------------+-----------+</span></span><br><span class="line"><span class="string">|        tableName|isTemporary|</span></span><br><span class="line"><span class="string">+-----------------+-----------+</span></span><br><span class="line"><span class="string">|dm_ica_dhcl_day_2|      false|</span></span><br><span class="line"><span class="string">|      es_prpcmain|      false|</span></span><br><span class="line"><span class="string">|           kmeans|      false|</span></span><br><span class="line"><span class="string">|         log_user|      false|</span></span><br><span class="line"><span class="string">|        part_test|      false|</span></span><br><span class="line"><span class="string">+-----------------+-----------+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">scala&gt; sqlContext.sql("select * from kmeans").show</span></span><br><span class="line"><span class="string">+------------------+------------------+-----------------+------------------+------------------+------------------+------------------+------------------+</span></span><br><span class="line"><span class="string">|           Channel|            Region|            Fresh|              Milk|           Grocery|            Frozen|  Detergents_Paper|        Delicassen|</span></span><br><span class="line"><span class="string">+------------------+------------------+-----------------+------------------+------------------+------------------+------------------+------------------+</span></span><br><span class="line"><span class="string">| 1.847222222222222| 2.694444444444444|4390.472222222222| 8350.944444444443|13049.166666666666|1276.5972222222222|          5650.125|          1448.625|</span></span><br><span class="line"><span class="string">|1.9259259259259258|2.3703703703703702|6984.222222222222|17038.629629629628|24998.925925925923|2246.8888888888887| 10553.25925925926| 2789.333333333333|</span></span><br><span class="line"><span class="string">|1.0579710144927537|2.4855072463768115|4770.130434782609| 2693.608695652174| 3151.927536231884| 2609.753623188406|  869.036231884058| 880.8188405797101|</span></span><br><span class="line"><span class="string">| 1.131578947368421|2.6578947368421053|33666.55263157895|4827.4473684210525|5226.5526315789475|  4207.78947368421| 938.8947368421052|1850.9210526315787|</span></span><br><span class="line"><span class="string">|               1.0|               2.5|          34782.0|           30367.0|           16898.0|           48701.5|             755.5|           26776.0|</span></span><br><span class="line"><span class="string">|               2.0|2.8000000000000003|          25603.0|43460.600000000006|61472.200000000004|            2636.0|           29974.2|            2708.8|</span></span><br><span class="line"><span class="string">|1.1923076923076923|2.5480769230769234|16615.94230769231|3053.4807692307695| 4382.548076923077|          3407.125| 965.7019230769231| 1489.923076923077|</span></span><br><span class="line"><span class="string">|               1.0|2.4285714285714284|68409.71428571428| 7298.857142857142|            8161.0| 11348.42857142857|1409.4285714285713|            3061.0|</span></span><br><span class="line"><span class="string">+------------------+------------------+-----------------+------------------+------------------+------------------+------------------+------------------+</span></span><br></pre></td></tr></table></figure>
+<p>注意，上面有一些warn，这个可以忽略，参见<a href="https://issues.apache.org/jira/browse/SPARK-14522" target="_blank" rel="noopener">https://issues.apache.org/jira/browse/SPARK-14522</a></p>
+<p>如果感觉难受，就下载google-collections-1.0.jar，放到lib库文件里</p>
+<h2 id="Spark-2-X"><a href="#Spark-2-X" class="headerlink" title="Spark 2.X"></a>Spark 2.X</h2><p>TODO： 后续补充一下。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2017/09/19/2017-09-19Spark%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%81%9A%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/09/19/2017-09-19Spark%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%81%9A%E7%B1%BB/" class="post-title-link" itemprop="url">2017-09-19Spark机器学习之聚类</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-09-19 13:51:29" itemprop="dateCreated datePublished" datetime="2017-09-19T13:51:29+08:00">2017-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-13 19:22:03" itemprop="dateModified" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Spark机器学习之聚类"><a href="#Spark机器学习之聚类" class="headerlink" title="Spark机器学习之聚类"></a>Spark机器学习之聚类</h1><h2 id="什么是聚类"><a href="#什么是聚类" class="headerlink" title="什么是聚类"></a>什么是聚类</h2><p><strong>聚类</strong>也称之为自动分类，是一种无监督的学习方法。算法的原则是基于度量数据对象之间的相似性或相异性，将数据对象集划分为多个簇；相比较于分类技术，聚类只需要较少的专家知识(领域知识)，就可以自动发掘数据集中的群组</p>
+<p>##聚类的种类</p>
+<ul>
+<li>KMeans</li>
+<li>Gaussian Mixture Model</li>
+<li><strong>Power iteration clustering (PIC)</strong> </li>
+<li>Latent Dirichlet allocation (LDA)(隐含狄利克雷分配)</li>
+<li>Bisecting k-means(<strong>二分K均值算法</strong>)</li>
+</ul>
+<p>二分k均值（bisecting k-means）是一种层次聚类方法，算法的主要思想是：首先将所有点作为一个簇，然后将该簇一分为二。之后选择能最大程度降低聚类代价函数（也就是误差平方和）的簇划分为两个簇。以此进行下去，直到簇的数目等于用户给定的数目K为止。<strong>bisecting k-means通常比常规K-Means方法运算快一些</strong>，也和K-Means聚类方法得到结果有所不同。 </p>
+<ul>
+<li><strong>Streaming k-means</strong></li>
+</ul>
+<h3 id="K-Means算法"><a href="#K-Means算法" class="headerlink" title="K-Means算法"></a>K-Means算法</h3><p>K-means 算法也是一个迭代式的算法，其主要步骤如下:</p>
+<ul>
+<li>第一步，选择 K 个点作为初始聚类中心。</li>
+<li>第二步，计算其余所有点到聚类中心的距离，并把每个点划分到离它最近的聚类中心所在的聚类中去。在这里，衡量距离一般有多个函数可以选择，最常用的是欧几里得距离 (Euclidean Distance), 也叫欧式距离。公式如下：</li>
+</ul>
+<p>$$<br>D(C,X) = \sqrt{\sum<em>{i=1}^{n}(^{C</em>{i}} - ^{X_{i}})^2}<br>$$</p>
+<p>其中 C 代表中心点，X 代表任意一个非中心点。</p>
+<ul>
+<li>第三步，重新计算每个聚类中所有点的平均值，并将其作为新的聚类中心点。</li>
+<li>最后，重复 (二)，(三) 步的过程，直至聚类中心不再发生改变，或者算法达到预定的迭代次数，又或聚类中心的改变小于预先设定的阀值。</li>
+</ul>
+<p>##Spark Mllib自带的聚类算法</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">iclouding</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

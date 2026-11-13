@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dingguotao.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":300},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="同步各种源和仓库同步epel源由于公司的机器不能上网，所以必须把外面的epel仓库同步过来传上去。 我用的是Vmware Workstation的虚拟机，版本是CentOS 6.5 另外， 由于同步下来的数据较大，所以推荐共享一个windows 主机的目录到虚拟机里面 如下图  然后创建对应目录 1mkdir -p &#x2F;mnt&#x2F;hgfs&#x2F;Share&#x2F;epel&#x2F;7&#x2F;x86_64&#x2F; 之后开始同步，我是用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同步各种仓库">
+<meta property="og:url" content="https://dingguotao.github.io/2017/07/21/2017-07-21%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E4%BB%93%E5%BA%93/index.html">
+<meta property="og:site_name" content="大数据部落">
+<meta property="og:description" content="同步各种源和仓库同步epel源由于公司的机器不能上网，所以必须把外面的epel仓库同步过来传上去。 我用的是Vmware Workstation的虚拟机，版本是CentOS 6.5 另外， 由于同步下来的数据较大，所以推荐共享一个windows 主机的目录到虚拟机里面 如下图  然后创建对应目录 1mkdir -p &#x2F;mnt&#x2F;hgfs&#x2F;Share&#x2F;epel&#x2F;7&#x2F;x86_64&#x2F; 之后开始同步，我是用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dingguotao.github.io/2017/07/21/2017-07-21%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E4%BB%93%E5%BA%93/%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95.png">
+<meta property="article:published_time" content="2017-07-21T08:29:18.000Z">
+<meta property="article:modified_time" content="2026-11-13T11:22:03.398Z">
+<meta property="article:author" content="iclouding">
+<meta property="article:tag" content="Tools, Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dingguotao.github.io/2017/07/21/2017-07-21%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E4%BB%93%E5%BA%93/%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95.png">
+
+
+<link rel="canonical" href="https://dingguotao.github.io/2017/07/21/2017-07-21%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E4%BB%93%E5%BA%93/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dingguotao.github.io/2017/07/21/2017-07-21%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E4%BB%93%E5%BA%93/","path":"2017/07/21/2017-07-21同步各种仓库/","title":"同步各种仓库"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>同步各种仓库 | 大数据部落</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大数据部落</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hadoop, Spark, OpenStack，Docker</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E6%BA%90%E5%92%8C%E4%BB%93%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">同步各种源和仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5epel%E6%BA%90"><span class="nav-number">1.1.</span> <span class="nav-text">同步epel源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epel%E4%BB%93%E5%BA%93%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">epel仓库同步问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-max-connections-20-reached"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.max connections (20) reached</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-rsync-connection-unexpectedly-closed"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.rsync: connection unexpectedly closed</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pypi-python%E4%BB%93%E5%BA%93"><span class="nav-number">1.3.</span> <span class="nav-text">pypi python仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">同步软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">参考文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5ceph%E7%9A%84%E6%BA%90"><span class="nav-number">1.4.</span> <span class="nav-text">同步ceph的源</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="iclouding"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">iclouding</p>
+  <div class="site-description" itemprop="description">Hadoop, Spark, OpenStack，Docker</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dingguotao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;dingguotao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2017/07/21/2017-07-21%E5%90%8C%E6%AD%A5%E5%90%84%E7%A7%8D%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="同步各种仓库 | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          同步各种仓库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-07-21 16:29:18" itemprop="dateCreated datePublished" datetime="2017-07-21T16:29:18+08:00">2017-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-13 19:22:03" itemprop="dateModified" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tools-Linux/" itemprop="url" rel="index"><span itemprop="name">Tools, Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="同步各种源和仓库"><a href="#同步各种源和仓库" class="headerlink" title="同步各种源和仓库"></a>同步各种源和仓库</h1><h2 id="同步epel源"><a href="#同步epel源" class="headerlink" title="同步epel源"></a>同步epel源</h2><p>由于公司的机器不能上网，所以必须把外面的epel仓库同步过来传上去。</p>
+<p>我用的是Vmware Workstation的虚拟机，版本是CentOS 6.5</p>
+<p>另外， 由于同步下来的数据较大，所以推荐共享一个windows 主机的目录到虚拟机里面</p>
+<p>如下图</p>
+<p><img src="/2017/07/21/2017-07-21同步各种仓库/共享目录.png" alt="共享目录"></p>
+<p>然后创建对应目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mnt/hgfs/Share/epel/7/x86_64/</span><br></pre></td></tr></table></figure>
+<p>之后开始同步，我是用的是中国科技大学的epel源。第一个是CentOS 7 的epel仓库,第二个是CentOS6的</p>
+<p><strong>注意：同步epel需要很久，所以可以选择晚上同步</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> For CentOS7</span></span><br><span class="line">[root@localhost ~]# rsync -avzL rsync://rsync.mirrors.ustc.edu.cn/fedora-epel/7/x86_64/ /mnt/hgfs/Share/epel/7/x86_64/</span><br><span class="line"> _______________________________________________________________</span><br><span class="line">|         University of Science and Technology of China         |</span><br><span class="line">|           Open Source Mirror  (mirrors.ustc.edu.cn)           |</span><br><span class="line">|===============================================================|</span><br><span class="line">|                                                               |</span><br><span class="line">| Debian primary mirror in China mainland (ftp.cn.debian.org),  |</span><br><span class="line">|     also mirroring a great many OSS projects &amp; Linux distros. |</span><br><span class="line">|                                                               |</span><br><span class="line">| Currently we don't limit speed. To prevent overload, Each IP  |</span><br><span class="line">| is only allowed to start upto 2 concurrent rsync connections. |</span><br><span class="line">|                                                               |</span><br><span class="line">| This site also provides http/https/ftp access.                |</span><br><span class="line">|                                                               |</span><br><span class="line">| Supported by USTC Network Information Center                  |</span><br><span class="line">|          and USTC Linux User Group (http://lug.ustc.edu.cn/). |</span><br><span class="line">|                                                               |</span><br><span class="line">|    Sync Status:  http://mirrors.ustc.edu.cn/status/           |</span><br><span class="line">|           News:  http://servers.blog.ustc.edu.cn/             |</span><br><span class="line">|        Contact:  lug@ustc.edu.cn                              |</span><br><span class="line">|                                                               |</span><br><span class="line">| Some repos are not available due to hard disks maintenance.   |</span><br><span class="line">| See http://servers.ustclug.org/2016/11/mirrors-services-outage|</span><br><span class="line">| Maintenance starts from 2016/11/14. No ETA yet.               |</span><br><span class="line">|_______________________________________________________________|</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">receiving incremental file list</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> For CentOS6</span></span><br><span class="line">[root@localhost ~]# rsync -avzL rsync://rsync.mirrors.ustc.edu.cn/fedora-epel/6/x86_64/ /mnt/hgfs/Share/epel/6/x86_64/</span><br></pre></td></tr></table></figure>
+<p>同步成功的状态<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">lucrypt-libs-5.0.1-1.el7.x86_64.rpm</span><br><span class="line">z/zvbi-0.2.35-1.el7.x86_64.rpm</span><br><span class="line">z/zvbi-devel-0.2.35-1.el7.x86_64.rpm</span><br><span class="line">z/zvbi-fonts-0.2.35-1.el7.noarch.rpm</span><br><span class="line"></span><br><span class="line">sent 45080 bytes  received 1208399921 bytes  1762866.52 bytes/sec</span><br><span class="line">total size is 24832107489  speedup is 20.55</span><br><span class="line"></span><br><span class="line">[root@localhost x86_64]# pwd</span><br><span class="line">/mnt/hgfs/Share/epel/7/x86_64</span><br><span class="line">[root@localhost x86_64]# du -sh</span><br><span class="line">24G	.</span><br></pre></td></tr></table></figure></p>
+<p>同步成功过后，大概有24G的文件，压缩一下传到FTP服务器，再中转到服务器上。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Share]# pwd</span><br><span class="line">/mnt/hgfs/Share</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打包时，按照每个保4打包</span></span><br><span class="line">[root@localhost Share]# tar zcvf - epel | split -b 4096m - epel7.tar.gz</span><br><span class="line">[root@localhost Share]# ls epel7.tar.gza*</span><br><span class="line">epel7.tar.gzaa  epel7.tar.gzab  epel7.tar.gzac  epel7.tar.gzad  epel7.tar.gzae  epel7.tar.gzaf</span><br></pre></td></tr></table></figure>
+<p>之后传到服务器上，解压一下即可<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat epel7.tar.gz* | sudo tar zxv</span><br></pre></td></tr></table></figure></p>
+<h2 id="epel仓库同步问题"><a href="#epel仓库同步问题" class="headerlink" title="epel仓库同步问题"></a>epel仓库同步问题</h2><p>同步的时候，可能出现的问题：</p>
+<h3 id="1-max-connections-20-reached"><a href="#1-max-connections-20-reached" class="headerlink" title="1.max connections (20) reached"></a>1.max connections (20) reached</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rsync -avzL rsync://rsync.mirrors.ustc.edu.cn/fedora-epel/7/x86_64/ /mnt/hgfs/Share/epel/7/x86_64/</span><br><span class="line"> _______________________________________________________________</span><br><span class="line">|         University of Science and Technology of China         |</span><br><span class="line">|           Open Source Mirror  (mirrors.ustc.edu.cn)           |</span><br><span class="line">|===============================================================|</span><br><span class="line">|                                                               |</span><br><span class="line">| Debian primary mirror in China mainland (ftp.cn.debian.org),  |</span><br><span class="line">|     also mirroring a great many OSS projects &amp; Linux distros. |</span><br><span class="line">|                                                               |</span><br><span class="line">| Currently we don't limit speed. To prevent overload, Each IP  |</span><br><span class="line">| is only allowed to start upto 2 concurrent rsync connections. |</span><br><span class="line">|                                                               |</span><br><span class="line">| This site also provides http/https/ftp access.                |</span><br><span class="line">|                                                               |</span><br><span class="line">| Supported by USTC Network Information Center                  |</span><br><span class="line">|          and USTC Linux User Group (http://lug.ustc.edu.cn/). |</span><br><span class="line">|                                                               |</span><br><span class="line">|    Sync Status:  http://mirrors.ustc.edu.cn/status/           |</span><br><span class="line">|           News:  http://servers.blog.ustc.edu.cn/             |</span><br><span class="line">|        Contact:  lug@ustc.edu.cn                              |</span><br><span class="line">|                                                               |</span><br><span class="line">| Some repos are not available due to hard disks maintenance.   |</span><br><span class="line">| See http://servers.ustclug.org/2016/11/mirrors-services-outage|</span><br><span class="line">| Maintenance starts from 2016/11/14. No ETA yet.               |</span><br><span class="line">|_______________________________________________________________|</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@ERROR: max connections (20) reached -- try again later</span><br><span class="line">rsync error: error starting client-server protocol (code 5) at main.c(1503) [receiver=3.0.6]</span><br></pre></td></tr></table></figure>
+<p>这种问题是由于中科大的源设置了最大连接数，解决方法就是换个时间点再执行以下命令</p>
+<h3 id="2-rsync-connection-unexpectedly-closed"><a href="#2-rsync-connection-unexpectedly-closed" class="headerlink" title="2.rsync: connection unexpectedly closed"></a>2.rsync: connection unexpectedly closed</h3><p>问题异常如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x/xenlism-wildfire-day-0-0.1.20160511gitd3b9ad2.el7.noarch.rpm</span><br><span class="line">rsync: connection unexpectedly closed (6983597816 bytes received so far) [receiver]</span><br><span class="line">rsync error: error in rsync protocol data stream (code 12) at io.c(600) [receiver=3.0.6]</span><br><span class="line">rsync: connection unexpectedly closed (285 bytes received so far) [generator]</span><br><span class="line">rsync error: error in rsync protocol data stream (code 12) at io.c(600) [generator=3.0.6]</span><br></pre></td></tr></table></figure>
+<p>解决办法同上，再次执行命令即可。</p>
+<h2 id="pypi-python仓库"><a href="#pypi-python仓库" class="headerlink" title="pypi python仓库"></a>pypi python仓库</h2><p>首先声明一点，python的pypi同步软件，由于我用的这个不支持python2.6，而python2.7又需要CentOS7系列虚拟机，但是我在Vmware Workstation上安装了CentOS7以后，无法共享出windows的目录，原因是vmware-tools里面hgfs程序无法正常开启。被迫用了Orcal VirtualBox。期间也是各种折腾（没办法，开源就是这个毛病）。终于在Virtualbox里装了CentOS7，并且共享了主机的一个目录过去。</p>
+<p>关于为什么要共享目录：因为我下载pypi源的时候，太大了，Linux磁盘装不下。</p>
+<p>废话不多说，开始干活。</p>
+<h3 id="同步软件"><a href="#同步软件" class="headerlink" title="同步软件"></a>同步软件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum install python-pip -y</span><br><span class="line">[root@localhost ~]# pip install bandersnatch</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建好要同步的目录</span></span><br><span class="line">[root@localhost pypi]# pwd</span><br><span class="line">/media/sf_Share/pypi</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行以下以下命令，会生成相应的配置文件</span></span><br><span class="line">[root@localhost pypi]# bandersnatch mirror</span><br><span class="line">2016-11-24 00:00:54,927 WARNING: Config file '/etc/bandersnatch.conf' missing, creating default config.</span><br><span class="line">2016-11-24 00:00:54,927 WARNING: Please review the config file, then run 'bandersnatch' again.</span><br><span class="line"><span class="meta">#</span><span class="bash"> 进去修改一下配置文件</span></span><br><span class="line"></span><br><span class="line">[root@localhost pypi]# vim /etc/bandersnatch.conf </span><br><span class="line">directory = /media/sf_Share/pypi  #  要同步的本机目录</span><br><span class="line">master = https://pypi.python.org  #  要同步的pypi仓库</span><br><span class="line">workers = 10					  # 根据服务器情况，可以开多个线程</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开始同步</span></span><br><span class="line">[root@localhost ~]# bandersnatch mirror</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  很长时间以后就同步结束了</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  查看一下文件夹大小</span></span><br></pre></td></tr></table></figure>
+<h3 id="参考文件"><a href="#参考文件" class="headerlink" title="参考文件"></a>参考文件</h3><p><a href="http://www.linuxhot.com/pypi-mirrors.html" target="_blank" rel="noopener">制作PyPi镜像仓库</a></p>
+<h2 id="同步ceph的源"><a href="#同步ceph的源" class="headerlink" title="同步ceph的源"></a>同步ceph的源</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ceph]# mkdir -p /mnt/hgfs/Share/ceph/rpm-jewel</span><br><span class="line">[root@localhost ceph]# rsync -avzL rsync://rsync.mirrors.ustc.edu.cn/ceph/rpm-jewel /mnt/hgfs/Share/ceph/rpm-jewel/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意，此处对于其他版本，修改对应包即可</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 特别注意，同步的时候，忘了同步key</span></span><br><span class="line">[root@localhost ceph]# rsync -avzL rsync://rsync.mirrors.ustc.edu.cn/ceph/keys /mnt/hgfs/Share/ceph/keys</span><br><span class="line">两个都同步一下，最后放在集群上</span><br></pre></td></tr></table></figure>
+<p>压缩</p>
+<p>上传到服务器</p>
+<p>解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat rpm-jewel.tar.gz* | sudo tar zxv</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Tools-Linux/" rel="tag"># Tools, Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/05/2017-07-05Spark-%E8%B0%83%E4%BC%98%E6%80%BB%E7%BB%93/" rel="prev" title="Spark 调优总结">
+                  <i class="fa fa-angle-left"></i> Spark 调优总结
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/09/04/2017-09-04ICE%E8%AF%A6%E8%A7%A3/" rel="next" title="ICE详解">
+                  ICE详解 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">iclouding</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

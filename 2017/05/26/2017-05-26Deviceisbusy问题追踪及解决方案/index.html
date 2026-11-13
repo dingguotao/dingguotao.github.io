@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha256-4Lad8m4ZWW1Lgb9+sMVLYEfnIh7BjV1NQMEe79Pviks=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dingguotao.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.29.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12,"width":300},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Docker: Device is busy 问题追踪及解决方案 碰到这个问题很多次了，一直找不到合适的办法解决。有幸看到了这篇文章，mark以下。原文链接：http:&#x2F;&#x2F;blog.terminus.io&#x2F;docker-device-is-busy&#x2F;  [TOC]  场景回顾使用命令 docker-compose down &amp;&amp; docker-compose up -d 重启 do">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Device is busy 问题追踪及解决方案(转)">
+<meta property="og:url" content="https://dingguotao.github.io/2017/05/26/2017-05-26Deviceisbusy%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="大数据部落">
+<meta property="og:description" content="Docker: Device is busy 问题追踪及解决方案 碰到这个问题很多次了，一直找不到合适的办法解决。有幸看到了这篇文章，mark以下。原文链接：http:&#x2F;&#x2F;blog.terminus.io&#x2F;docker-device-is-busy&#x2F;  [TOC]  场景回顾使用命令 docker-compose down &amp;&amp; docker-compose up -d 重启 do">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-05-26T06:10:00.000Z">
+<meta property="article:modified_time" content="2026-11-13T11:22:03.397Z">
+<meta property="article:author" content="iclouding">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://dingguotao.github.io/2017/05/26/2017-05-26Deviceisbusy%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dingguotao.github.io/2017/05/26/2017-05-26Deviceisbusy%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/","path":"2017/05/26/2017-05-26Deviceisbusy问题追踪及解决方案/","title":"Docker Device is busy 问题追踪及解决方案(转)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Docker Device is busy 问题追踪及解决方案(转) | 大数据部落</title>
+  
+
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-search popup-trigger" aria-label="搜索" role="button">
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">大数据部落</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Hadoop, Spark, OpenStack，Docker</p>
+  </div>
+
+  <div class="site-nav-toggle" aria-label="切换导航栏" role="button">
+      <i class="fa fa-ellipsis fa-fw fa-lg"></i>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-Device-is-busy-%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">Docker: Device is busy 问题追踪及解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.1.</span> <span class="nav-text">场景回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E9%87%8D%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">问题重现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%92%8C-nginx-%E6%9C%89%E5%85%B3"><span class="nav-number">1.2.1.</span> <span class="nav-text">为什么和 nginx 有关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%88%E5%A4%9A%E7%BA%BF%E4%B8%8A%E6%9C%BA%E5%99%A8%E5%B7%B2%E7%BB%8F%E8%B7%91%E7%9D%80%E4%B8%9A%E5%8A%A1%E5%AE%B9%E5%99%A8%E4%B8%8D%E8%83%BD%E9%87%8D%E5%90%AF-docker-daemon-%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">很多线上机器已经跑着业务容器不能重启 docker daemon 怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%B2%A1%E6%9C%89%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%B8%8D%E5%BD%B1%E5%93%8D%E4%B8%9A%E5%8A%A1%E5%AE%B9%E5%99%A8%E7%9A%84%E5%89%8D%E6%8F%90%E4%B8%8B%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AE-docker-daemon-%E5%91%A2%EF%BC%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">有没有方法可以在不影响业务容器的前提下重新配置 docker daemon 呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.4.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="iclouding"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">iclouding</p>
+  <div class="site-description" itemprop="description">Hadoop, Spark, OpenStack，Docker</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dingguotao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;dingguotao" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dingguotao.github.io/2017/05/26/2017-05-26Deviceisbusy%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="iclouding">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大数据部落">
+      <meta itemprop="description" content="Hadoop, Spark, OpenStack，Docker">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Docker Device is busy 问题追踪及解决方案(转) | 大数据部落">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker Device is busy 问题追踪及解决方案(转)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-05-26 14:10:00" itemprop="dateCreated datePublished" datetime="2017-05-26T14:10:00+08:00">2017-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-11-13 19:22:03" itemprop="dateModified" datetime="2026-11-13T19:22:03+08:00">2026-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Docker-Device-is-busy-问题追踪及解决方案"><a href="#Docker-Device-is-busy-问题追踪及解决方案" class="headerlink" title="Docker: Device is busy 问题追踪及解决方案"></a>Docker: Device is busy 问题追踪及解决方案</h1><blockquote>
+<p>碰到这个问题很多次了，一直找不到合适的办法解决。有幸看到了这篇文章，mark以下。原文链接：<a href="http://blog.terminus.io/docker-device-is-busy/" target="_blank" rel="noopener">http://blog.terminus.io/docker-device-is-busy/</a></p>
+</blockquote>
+<p>[TOC]</p>
+<hr>
+<h2 id="场景回顾"><a href="#场景回顾" class="headerlink" title="场景回顾"></a>场景回顾</h2><p>使用命令 <code>docker-compose down &amp;&amp; docker-compose up -d</code> 重启 docker 服务时，有时会遇到 <code>Device is Busy</code> 错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: <span class="keyword">for</span> terminus_paas-master_1  Driver devicemapper failed to remove root filesystem 8acf326b1e7c1038998ac04a6851dc4e1bacea8e6d9c927f7a092026aeb67970: Device is Busy</span><br></pre></td></tr></table></figure>
+<p>使用 <code>docker-compose down</code> 会导致一些容器异常结束，使其状态变为 <em>Dead</em>（可以用 <code>docker ps -a -f status=dead</code> 进行查看）。此时继续使用 <code>docker-compose up -d</code> 时，会报如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: <span class="keyword">for</span> paas-master Cannot start service paas-master: Container is marked <span class="keyword">for</span> removal and cannot be started.  </span><br><span class="line">ERROR: Encountered errors <span class="keyword">while</span> bringing up the project.</span><br></pre></td></tr></table></figure>
+<p>意思是，该容器已经被做好标记需要删除（状态为 Dead），所以不能启动它。</p>
+<h2 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h2><p>一开始对这个问题没有什么头绪。后来发现，其实这个看似偶然的问题可以被很容易的复现（reproduce），步骤如下：</p>
+<ol>
+<li><code>docker-compose up -d</code> 启动容器</li>
+<li>启动 <strong>nginx</strong></li>
+<li>修改 <strong>docker-compose.yml</strong> 文件中任一镜像的版本</li>
+<li>运行 <code>docker-compose up -d</code> 更新容器</li>
+</ol>
+<p>前三步都没问题。运行至第 4 步时，<em>docker-compose</em> 尝试 <strong>recreate</strong> 第三步中改变过版本的那个容器，但却意外的报错了。没错，就是 <strong>Device is Busy</strong>。此时检查该容器状态，果然已经变成了 <em>Dead</em> 。</p>
+<p>回想在我们的生产环境中，确实每台 PaaS Master 机器加入 PaaS 时都顺带安装了 nginx 。</p>
+<h3 id="为什么和-nginx-有关"><a href="#为什么和-nginx-有关" class="headerlink" title="为什么和 nginx 有关"></a>为什么和 nginx 有关</h3><p>难道 nginx 会干扰 docker 容器的起停？</p>
+<blockquote>
+<p>是的。实际上，任何 systemd unit file 中带有 <code>PrivateTmp=true</code> 的 serivce 都有可能导致这个问题，比如 <code>ntpd.service</code>，<code>systemd-udevd service</code>。</p>
+</blockquote>
+<p>首先，运行以下命令来查看 docker / host / nginx 的 mount namespace：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@10 ~]<span class="comment"># systemctl status docker |grep PID</span></span><br><span class="line"> Main PID: 980 (dockerd)</span><br><span class="line">[root@10 ~]<span class="comment"># ll /proc/980/ns/mnt</span></span><br><span class="line">lrwxrwxrwx. 1 root root 0 Apr 23 16:32 /proc/980/ns/mnt -&gt; mnt:[4026531840]  </span><br><span class="line">[root@10 ~]<span class="comment"># ll /proc/$$/ns/mnt</span></span><br><span class="line">lrwxrwxrwx. 1 root root 0 Apr 23 16:32 /proc/3621/ns/mnt -&gt; mnt:[4026531840]  </span><br><span class="line">[root@10 ~]<span class="comment"># systemctl status nginx |grep PID</span></span><br><span class="line"> Main PID: 3714 (nginx)</span><br><span class="line">[root@10 ~]<span class="comment"># ll /proc/3714/ns/mnt</span></span><br><span class="line">lrwxrwxrwx. 1 root root 0 Apr 23 16:38 /proc/3714/ns/mnt -&gt; mnt:[4026532203]</span><br></pre></td></tr></table></figure>
+<p>可以看出，docker 运行在 <code>host mount namespace</code> 上，即 <strong>docker</strong> 与 <strong>host</strong> 共享 同一个<code>mount namespace</code>。同时可以发现，<strong>nginx</strong> 在 <strong>docker</strong> 之后启动，并且运行在 <strong>私有的</strong> <code>mount namespace</code> 里。</p>
+<p>在 nginx 的 systemd 文件中有这么一行配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Service]</span><br><span class="line">PrivateTmp=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>这行配置保证了 nginx 会运行在 <strong>私有的</strong> <code>mount namespace</code> 里，也正是该配置导致 docker 因为无法删除正在被其他 <code>mount namespace</code> 中的挂载点（mount point）使用的文件夹而报 <code>Device is busy</code> 的错误：</p>
+<p>此时如果通过 <code>systemctl restart nginx</code> 重启 nginx，使用 <code>grep devicemapper/mnt /proc/&lt;nginx-master-pid&gt;/mounts</code> 可以发现，docker 的挂载点泄露到了 nginx 的 mount namespace 里。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@10 ~]<span class="comment"># systemctl status nginx |grep PID</span></span><br><span class="line"> Main PID: 3714 (nginx)</span><br><span class="line">[root@10 ~]<span class="comment"># grep devicemapper/mnt /proc/3714/mounts</span></span><br><span class="line">[root@10 ~]<span class="comment">#</span></span><br><span class="line">[root@10 ~]<span class="comment"># systemctl restart nginx</span></span><br><span class="line">[root@10 ~]<span class="comment"># systemctl status nginx |grep PID</span></span><br><span class="line"> Main PID: 4744 (nginx)</span><br><span class="line">[root@10 ~]<span class="comment"># grep devicemapper/mnt /proc/4744/mounts</span></span><br><span class="line">/dev/mapper/docker-253:0-67984082-1b610c14980176332f5646fabc9d809e0f4604588618f4adbe3f8f78f1736bb1 /var/lib/docker/devicemapper/mnt/1b610c14980176332f5646fabc9d809e0f4604588618f4adbe3f8f78f1736bb1 xfs rw,seclabel,relatime,nouuid,attr2,inode64,logbsize=64k,sunit=128,swidth=128,noquota 0 0</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>因此，当 docker 需要删除一个容器时被 nginx 阻止了，因为<code>/var/lib/docker/devicemapper/mnt/1b610c14980176332f5646fabc9d809e0f4604588618f4adbe3f8f78f1736bb1</code> 这个目录同时被 nginx 使用了，而 nginx 的 mount namespace 是私有的，docker 无法删除这个正在被 nginx 使用的文件夹，从而报错。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>最根本的方法是，当机器加入 PaaS 时，在 <code>docker.service</code> 中加上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Service]</span><br><span class="line">MountFlags=slave</span><br></pre></td></tr></table></figure>
+<p>来保证 docker 及 container 运行在 <strong>私有</strong> 的 mount namespace 上。当 docker 以这种方式启动时，可以使用 <code>grep /mnt /proc/self/mountinfo</code> 来检测以这种方式启动的容器确实看不到 mount point 了，而之前遗留的挂载点仍然可以看到。</p>
+<h3 id="很多线上机器已经跑着业务容器不能重启-docker-daemon-怎么办？"><a href="#很多线上机器已经跑着业务容器不能重启-docker-daemon-怎么办？" class="headerlink" title="很多线上机器已经跑着业务容器不能重启 docker daemon 怎么办？"></a>很多线上机器已经跑着业务容器不能重启 docker daemon 怎么办？</h3><p>在生产中，需要尽可能保证所有的操作 <strong>不影响正在运行的业务容器</strong>。</p>
+<p>所以，在已有条件下，既不能停止 nginx，又不能重启 docker daemon，唯一的方法只有在 <code>docker-compose down</code> 出错的情况下通过执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker rm -f $(docker ps -a -q -f status=dead)</span></span><br></pre></td></tr></table></figure>
+<p>来强制删除 dead container 了。虽然仍然会有错误信息提示，但是可以看到 Dead container 确实被删除了。之后可以正常运行 <code>docker-compose up -d</code> 重启 PaaS-Master。</p>
+<h3 id="有没有方法可以在不影响业务容器的前提下重新配置-docker-daemon-呢？"><a href="#有没有方法可以在不影响业务容器的前提下重新配置-docker-daemon-呢？" class="headerlink" title="有没有方法可以在不影响业务容器的前提下重新配置 docker daemon 呢？"></a>有没有方法可以在不影响业务容器的前提下重新配置 docker daemon 呢？</h3><p>有。docker 从 1.12.0 开始支持在 <strong>不重启 container</strong> 的情况下重启 docker daemon，只需要在 docker daemon 启动时增加 <code>--live-restore=true</code> 这个参数。可惜的是，该参数直到目前仍不支持 daemon reload（类似 nginx 的 reload 和 restart），只能重启 dockerd 后生效。</p>
+<h2 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h2><p>挂载点泄露实际上是 RHEL/CentOS 内核的一个 <strong>bug</strong>，目前预计会在 RHEL7.4 kernel 中修复。因此该问题理论上在 Fedora 中不是存在的。</p>
+<p>目前在 RHEL/CentOS 下需要在 <code>docker.service</code> 中增加 <code>MountFlags=slave</code> 来保证 <code>mount namespace</code> 是私有的，不会造成挂载点泄露。</p>
+<p>另外，挂载点泄露在各种 storage driver 中都存在，比如最常见的 <code>devicemeppaer</code> 和 <code>overlay</code>。</p>
+<p>但是，目前 RHEL/CentOS 版本下 <code>MountFlags=slave</code> 和 <code>--live-restore</code> 两个给力的参数不能同时存在。因为 <code>MountFlags=slave</code> 会导致 docker daemon 每次重启时私有挂载命名空间都会发生变化，而 <code>--live-restore</code> 又相当于使得容器持有了变化之前的旧的挂载点信息，因此，当重启 docker daemon 之后，执行 <code>docker exec</code> 试图进入容器时会报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpc error: code = 13 desc = invalid header field value <span class="string">"oci runtime error: exec failed: container_linux.go:247: starting container process caused \"process_linux.go:75: starting setns process caused \\\"fork/exec /proc/self/exe: no such file or directory\\\"\"\n"</span></span><br></pre></td></tr></table></figure>
+<p>值得一提的是，虽然无法进入容器，但是容器依旧工作正常并且 <code>docker logs</code> 也没问题。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>对于生产环境，遇到 <code>docker-compose up -d</code> 造成的 <code>Device is busy</code> 问题时，使用 <code>docker rm -f [container]</code> 后重新 <code>docker-compose up -d</code> 即可；</li>
+<li>对于新的机器，当前版本下为 <code>docker.service</code> 加上 <code>MountFlags=slave</code> 即可。</li>
+</ul>
+<p>参考资料</p>
+<ul>
+<li><a href="https://github.com/docker/docker/issues/27381" target="_blank" rel="noopener">Driver devicemapper failed to remove root filesystem. Device is busy</a></li>
+<li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=1419877" target="_blank" rel="noopener">Problem with docker exec after daemon restart</a></li>
+<li><a href="https://access.redhat.com/articles/2938171" target="_blank" rel="noopener">The RHEL docker package does not currently support –live-restore</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/05/26/2017-05-26%E4%BD%BF%E7%94%A8filebeats%E6%94%B6%E9%9B%86Docker%E6%97%A5%E5%BF%97/" rel="prev" title="使用filebeats收集Docker日志">
+                  <i class="fa fa-angle-left"></i> 使用filebeats收集Docker日志
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/05/26/Hexo%E4%B9%8Bnext%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%E9%A6%96%E9%A1%B5%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%85%A8%E6%96%87(%E5%8F%AA%E6%98%BE%E7%A4%BA%E9%A2%84%E8%A7%88)(%E8%BD%AC)/" rel="next" title="Hexo之next主题设置首页不显示全文(转)">
+                  Hexo之next主题设置首页不显示全文(转) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">iclouding</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
