@@ -32,45 +32,57 @@
   .count{color:var(--muted);font-size:13px;white-space:nowrap}
   ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
   .item{
+    display:flex;gap:16px;align-items:flex-start;
     background:var(--card);border:1px solid var(--line);border-radius:12px;
     padding:16px 18px;transition:border-color .15s,transform .15s;
   }
   .item:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .day{
+    flex:0 0 84px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12.5px;color:var(--muted);padding-top:2px;letter-spacing:-.02em;
+  }
+  .body{flex:1;min-width:0}
   .link{color:var(--accent);text-decoration:none;font-weight:600;font-size:16.5px;word-break:break-word}
   .link:hover{text-decoration:underline}
   .desc{margin:6px 0 0;color:var(--muted);font-size:14px}
   .meta{margin-top:8px;color:var(--muted);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-  .path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  .path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;word-break:break-all}
   .dot{opacity:.5}
   .empty{color:var(--muted);padding:28px 0;text-align:center;font-size:14px}
   .empty code{background:var(--accent-soft);padding:2px 6px;border-radius:5px;font-size:13px}
   footer{margin-top:36px;color:var(--muted);font-size:12.5px;text-align:center}
   .hidden{display:none}
+  @media (max-width:520px){
+    .item{flex-direction:column;gap:4px}
+    .day{flex:none}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>页面目录</h1>
-    <p class="sub">放在 <code>source/html/</code> 下的独立 HTML 页面，构建时自动收录。</p>
+    <p class="sub">放在 <code>source/html/年/月/日/</code> 下的独立 HTML 页面，构建时自动收录。</p>
   </header>
   <div class="bar">
-    <input type="search" id="q" placeholder="搜索标题或路径…" autocomplete="off">
+    <input type="search" id="q" placeholder="搜索标题、日期或路径…" autocomplete="off">
     <span class="count" id="c">1 个页面</span>
   </div>
   <ul id="list">
     
-      <li class="item" data-search="示例页面 · 独立 html 怎么放 demo.html 这是一个可直接复制的模板：把它复制到 source/html/ 下改名，内容换成你自己的即可。">
-        <a class="link" href="/html/demo.html">示例页面 · 独立 HTML 怎么放</a>
-        <p class="desc">这是一个可直接复制的模板：把它复制到 source/html/ 下改名，内容换成你自己的即可。</p>
-        <div class="meta">
-          <span class="path">/html/demo.html</span>
-          <span class="dot">·</span><span>2026-11-13 20:10</span>
-          <span class="dot">·</span><span>1.7 KB</span>
+      <li class="item" data-search="示例页面 · 独立 html 怎么放 2026/11/13/demo/index.html 这是一个可直接复制的模板：把它复制到 source/html/ 下改名，内容换成你自己的即可。 ">
+        <time class="day" datetime="2026-11-13">2026-11-13</time>
+        <div class="body">
+          <a class="link" href="/html/2026/11/13/demo/">示例页面 · 独立 HTML 怎么放</a>
+          <p class="desc">这是一个可直接复制的模板：把它复制到 source/html/ 下改名，内容换成你自己的即可。</p>
+          <div class="meta">
+            <span class="path">/html/2026/11/13/demo/</span>
+            <span class="dot">·</span><span>1.7 KB</span>
+          </div>
         </div>
       </li>
   </ul>
-  <footer>由 Hexo 构建时自动生成 · 最后更新 2026-11-13 20:16</footer>
+  <footer>由 Hexo 构建时自动生成 · 最后更新 2026-11-13</footer>
 </div>
 <script>
   var q = document.getElementById('q');
